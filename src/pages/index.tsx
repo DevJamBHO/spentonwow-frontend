@@ -1,6 +1,13 @@
+// pages/index.tsx
+
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../styles/login.module.scss';
+import 'animate.css/animate.min.css'; // Import animate.css
+import Layout from '../components/Layout';
+import Button from '../components/Button';
+import Input from '../components/Input';
+import Select from '../components/Select';
+import styles from '../styles/Login.module.scss';
 import { GetServerSideProps } from "next";
 import { getCapabilities } from "@/api/capabilities";
 import useStore from '@/store/useStore';
@@ -9,7 +16,7 @@ interface LoginProps {
   capabilities: any;
 }
 
-interface serverType {
+interface ServerType {
   Slug: string;
   Name: string;
   Region: string;
@@ -29,6 +36,11 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
     setCapabilities(formattedCapabilities);
   }, [capabilities, setCapabilities, formatCapabilities]);
 
+  const handleRegionSelect = (selectedRegion: string) => {
+    setRegion(selectedRegion);
+    setServer(''); // Reset server if region changes
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('server:', server);
@@ -39,63 +51,60 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
   };
 
   return (
-      <div className={styles.container}>
-        <div className={styles.content}>
+      <Layout>
+        <div className={styles.container}>
+          <header className={styles.header}>
+            <div>WoW Spent</div>
+          </header>
+          <section className={styles.intro}>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </section>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="region">Région :</label>
-              <select
-                  id="region"
-                  required
-                  value={region}
-                  onChange={(e) => setRegion(e.target.value)}
-              >
-                <option></option>
-                {storedCapabilities && Object.keys(storedCapabilities).map((region: string) => (
-                    <option value={region} key={region}>
-                      {region.toUpperCase()}
-                    </option>
-                ))}
-              </select>
+            <div className={styles.buttonGroup}>
+              {storedCapabilities && Object.keys(storedCapabilities).map((regionKey: string) => (
+                  <Button
+                      key={regionKey}
+                      type="button"
+                      className={styles.regionButton}
+                      onClick={() => handleRegionSelect(regionKey)}
+                      isActive={region === regionKey}
+                  >
+                    {regionKey.toUpperCase()}
+                  </Button>
+              ))}
             </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="server">Serveur :</label>
-              <select
-                  id="server"
-                  required
-                  value={server}
-                  onChange={(e) => setServer(e.target.value)}
-                  disabled={region === ''}
-              >
-                <option></option>
-                {storedCapabilities && region !== '' && storedCapabilities[region].map((server: serverType) => (
-                    <option value={server.Slug} key={server.Slug}>
-                      {server.Name}
-                    </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="character">Character :</label>
-              <input
-                  type="text"
-                  id="character"
-                  value={character}
-                  onChange={(e) => setCharacter(e.target.value)}
-                  required
-                  disabled={server === ''}
-              />
-            </div>
-            <button type="submit" className={styles.button}>
+            <Select
+                id="server"
+                value={server}
+                onChange={(e) => setServer(e)}
+                required
+                disabled={region === ''}
+                label="Serveur :"
+                options={storedCapabilities && region !== '' ? storedCapabilities[region].map((server: ServerType) => ({ value: server.Slug, label: server.Name })) : []}
+            />
+            <Input
+                id="character"
+                type="text"
+                value={character}
+                onChange={(e) => setCharacter(e.target.value)}
+                required
+                disabled={server === ''}
+                label="Character :"
+            />
+            <Button type="submit" plain className={styles.button}>
               Search
-            </button>
+            </Button>
           </form>
-          {/* Emplacement pour la publicité */}
           <div className={styles.adContainer}>
             Placez la publicité ici
           </div>
+          <footer className={styles.footer}>
+            <p>&copy; 2024 WoW Spent</p>
+          </footer>
         </div>
-      </div>
+      </Layout>
   );
 };
 

@@ -1,0 +1,19 @@
+/* styles/global.css */
+
+/* Réinitialisation globale des marges et paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #e9ecef;  /* Utilisation de la couleur de fond */
+    margin: 0;
+    padding: 0;
+}

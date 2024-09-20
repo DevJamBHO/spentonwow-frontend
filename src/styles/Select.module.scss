@@ -1,0 +1,69 @@
+@import './variables.scss';
+
+.inputGroup {
+  margin-bottom: 0.5rem;
+  text-align: left;
+  position: relative;
+
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: $text-color;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  .selectInput {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $border-radius-small;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: $text-color;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+
+    &:focus {
+      border-color: $highlight-color;
+      box-shadow: 0 0 0 3px rgba($highlight-color, 0.2);
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .optionsList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: scroll;  // Allow vertical scrolling
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $border-radius-small;
+    background: $secondary-color;
+    margin-top: 0.2rem;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    // Hide the scrollbar but keep functionality
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    &.hidden {
+      display: none;
+    }
+
+    li {
+      padding: 0.75rem;
+      color: $text-color;
+      cursor: pointer;
+
+      &:hover {
+        background: $highlight-color;
+        color: $primary-color;
+      }
+    }
+  }
+}
