@@ -14,6 +14,7 @@
   background-position: center;
   overflow: hidden;
   position: relative;
+  transition: background-image 0.5s ease-in-out;
 
   .backgroundVideo {
     position: absolute;
@@ -23,6 +24,7 @@
     height: 100%;
     object-fit: cover;
     z-index: 1;
+    transition: opacity 0.5s ease-in-out;
   }
 
   &:before {
@@ -32,8 +34,9 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 2;
+    transition: background 0.5s ease-in-out;
   }
 
   .content {

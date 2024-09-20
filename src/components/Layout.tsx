@@ -13,7 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     useEffect(() => {
         const video = videoRef.current;
 
-        if (!video || video.canPlayType('video/mp4') === "") {
+        if (!video || typeof video.canPlayType !== 'function' || video.canPlayType('video/mp4') === "") {
             setVideoSupported(false);
             return;
         }
@@ -25,6 +25,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             } else {
                 video.play();
             }
+        };
+
+        const handleVideoError = () => {
+            setVideoSupported(false);
         };
 
         const playVideoBackward = () => {
@@ -41,18 +45,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         };
 
         video.addEventListener('ended', handleVideoEnd);
+        video.addEventListener('error', handleVideoError);
         video.play();
 
         return () => {
             video.removeEventListener('ended', handleVideoEnd);
+            video.removeEventListener('error', handleVideoError);
         };
     }, []);
 
     return (
-        <div className={styles.root} style={{ backgroundImage: !videoSupported ? "url('/images/background.png')" : 'none' }}>
+        <div className={styles.root} style={{ backgroundImage: !videoSupported ? "url('/images/background.webp')" : 'none' }}>
             {videoSupported && (
                 <video ref={videoRef} className={styles.backgroundVideo} muted>
-                    <source src="/videos/background.mp4" type="video/mp4" />
+                    <source src="/videos/background.webm" type="video/webm" />
                     Votre navigateur ne supporte pas les vidéos HTML5.
                 </video>
             )}
