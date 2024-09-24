@@ -6,7 +6,7 @@ interface AppState {
     formatCapabilities: (capabilities: any) => any;
 }
 
-const useStore = create<AppState>((set) => ({
+const useCapabilitiesStore = create<AppState>((set) => ({
     capabilities: null,
     setCapabilities: (capabilities) => set({ capabilities }),
     formatCapabilities: (capabilities) => {
@@ -24,8 +24,10 @@ const useStore = create<AppState>((set) => ({
             return acc;
         }, {});
 
+        console.log('olb',groupedByRegion )
+
         return groupedByRegion;
     }
 }));
 
-export default useStore;
+export default useCapabilitiesStore;

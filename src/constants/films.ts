@@ -1,0 +1,46 @@
+export interface Film {
+    price: number;
+    name: string;
+}
+
+export const films: Film[] = [
+    { price: 356000000, name: 'Avengers: Endgame' },
+    { price: 250000000, name: 'Avatar' },
+    { price: 300000000, name: 'Pirates of the Caribbean: On Stranger Tides' },
+    { price: 350000000, name: 'Avengers: Infinity War' },
+    { price: 300000000, name: 'Justice League' },
+    { price: 275000000, name: 'Star Wars: The Force Awakens' },
+    { price: 245000000, name: 'Spectre' },
+    { price: 258000000, name: 'The Lion King (2019)' },
+    { price: 260000000, name: 'The Dark Knight Rises' },
+    { price: 250000000, name: 'Star Wars: The Rise of Skywalker' },
+    { price: 300000000, name: 'Avengers: Age of Ultron' },
+    { price: 200000000, name: 'Frozen II' },
+    { price: 250000000, name: 'Batman v Superman: Dawn of Justice' },
+    { price: 220000000, name: 'The Hobbit: The Battle of the Five Armies' },
+    { price: 237000000, name: 'Harry Potter and the Half-Blood Prince' },
+    { price: 225000000, name: 'Frozen' },
+    { price: 200000000, name: 'Black Panther' },
+    { price: 245000000, name: 'Thor: Love and Thunder' },
+    { price: 150000000, name: 'Inception' },
+    { price: 200000000, name: 'The Matrix Resurrections' },
+    { price: 160000000, name: 'Mad Max: Fury Road' },
+    { price: 185000000, name: 'Wonder Woman' },
+    { price: 200000000, name: 'Captain America: Civil War' },
+    { price: 200000000, name: 'Spider-Man: No Way Home' },
+    { price: 230000000, name: 'The Fate of the Furious' },
+    { price: 250000000, name: 'The Hobbit: An Unexpected Journey' },
+    { price: 170000000, name: 'Guardians of the Galaxy' },
+    { price: 225000000, name: 'Jurassic World' },
+    { price: 175000000, name: 'The Jungle Book (2016)' },
+    { price: 150000000, name: 'Rogue One: A Star Wars Story' },
+    { price: 190000000, name: 'Iron Man 3' },
+    { price: 200000000, name: 'Man of Steel' },
+    { price: 250000000, name: 'The Amazing Spider-Man 2' },
+    { price: 185000000, name: 'Transformers: Dark of the Moon' },
+    { price: 220000000, name: 'Terminator Salvation' },
+    { price: 215000000, name: 'The Chronicles of Narnia: Prince Caspian' },
+    { price: 237000000, name: 'Quantum of Solace' },
+    { price: 225000000, name: 'X-Men: Days of Future Past' },
+    { price: 160000000, name: 'Warcraft' }
+];

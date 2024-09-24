@@ -4,6 +4,7 @@
   margin-bottom: 0.5rem;
   text-align: left;
   position: relative;
+  cursor: pointer;
 
   label {
     display: block;
@@ -12,6 +13,28 @@
     font-size: 0.9rem;
     font-weight: 500;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  .filterInput {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: $border-radius-small;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: $text-color;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+
+    &:focus {
+      border-color: $highlight-color;
+      box-shadow: 0 0 0 3px rgba($highlight-color, 0.2);
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .filterInputSmall {
+    padding: 0.3rem;
+    font-size: 0.8rem;
   }
 
   .selectInput {
@@ -31,13 +54,18 @@
     }
   }
 
+  .selectInputSmall {
+    padding: 0.3rem;
+    font-size: 0.8rem;
+  }
+
   .optionsList {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     max-height: 150px;
-    overflow-y: scroll;  // Allow vertical scrolling
+    overflow-y: scroll;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-small;
     background: $secondary-color;
@@ -45,14 +73,9 @@
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-    // Hide the scrollbar but keep functionality
     &::-webkit-scrollbar {
       width: 0;
       height: 0;
-    }
-
-    &.hidden {
-      display: none;
     }
 
     li {
@@ -64,6 +87,10 @@
         background: $highlight-color;
         color: $primary-color;
       }
+    }
+
+    &.hidden {
+      display: none;
     }
   }
 }

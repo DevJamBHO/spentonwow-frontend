@@ -1,0 +1,136 @@
+@import './variables.scss';
+//@import './Select.module.scss'; // Assurez-vous que le chemin est correct
+
+.dashboardLayout {
+  display: flex;
+  gap: $space-big;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.mainContainer {
+  flex: 7;
+
+  @media (max-width: 768px) {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+.sideContainers {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  gap: $space-big;
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    .sideContainer {
+      flex: 1;
+    }
+  }
+}
+
+.sideContainer {
+  flex: 1;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+}
+
+.siteName {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  flex: 0 0 80%;
+  text-align: center;
+}
+
+.currencySelect {
+  flex: 0 0 20%;
+  text-align: right;
+}
+
+.amountSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 2rem;
+  //background-color: rgba(255, 255, 255, 0.9);
+  color: $text-color;
+  padding: 2rem;
+  border-radius: $border-radius;
+}
+
+.amountDetails {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 6px $primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  //background-color: #fff;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.cardIcon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: $accent-color;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.cardValue {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.amountTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: $text-color;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.amountTitleIcon {
+  font-size: 1.5rem;
+  color: $secondary-color;
+}
+
+.amount {
+  font-size: 3rem;
+  font-weight: bold;
+  color: $highlight-color;
+  text-shadow: 1px 1px 2px #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}

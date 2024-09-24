@@ -3,9 +3,10 @@ import styles from '../styles/Layout.module.scss';
 
 interface LayoutProps {
     children: React.ReactNode;
+    big?: boolean;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const reverse = useRef(false);
     const [videoSupported, setVideoSupported] = useState(true);
@@ -55,7 +56,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }, []);
 
     return (
-        <div className={styles.root} style={{ backgroundImage: !videoSupported ? "url('/images/background.webp')" : 'none' }}>
+        <div className={`${styles.root} ${big ? styles.big : ''}`} style={{ backgroundImage: !videoSupported ? "url('/images/background.webp')" : 'none' }}>
             {videoSupported && (
                 <video ref={videoRef} className={styles.backgroundVideo} muted>
                     <source src="/videos/background.webm" type="video/webm" />
