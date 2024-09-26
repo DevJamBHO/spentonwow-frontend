@@ -8,8 +8,9 @@ import Select from '../components/Select';
 import Container from '../components/Container';
 import styles from '../styles/Login.module.scss';
 import useCapabilitiesStore from '@/store/useCapabilitiesStore';
-import {GetServerSideProps} from "next";
-import {getCapabilities} from "@/api/capabilities";
+import { GetServerSideProps } from "next";
+import { getCapabilities } from "@/api/capabilities";
+import { translate } from '@/utils/translate';
 
 interface LoginProps {
   capabilities: any;
@@ -28,12 +29,17 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
   const [region, setRegion] = useState<string>('');
   const [server, setServer] = useState<string>('');
   const [character, setCharacter] = useState<string>('');
+  const [isClient, setIsClient] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
     const formattedCapabilities = formatCapabilities(capabilities);
     setCapabilities(formattedCapabilities);
   }, [capabilities, setCapabilities, formatCapabilities]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleRegionSelect = (selectedRegion: string) => {
     setRegion(selectedRegion);
@@ -48,21 +54,25 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
     router.push('/dashboard');
   };
 
+  if (!isClient) {
+    return null;
+  }
+
   return (
       <Layout>
         <Container
-            header={<div>WoW Spent</div>}
+            header={<div>{translate('siteName')}</div>}
             footer={
               <div>
-                <p>&copy; 2024 WoW Spent. All rights reserved.</p>
-                <p>Terms &amp; Conditions | Privacy Policy</p>
+                <p>&copy; 2024 {translate('siteName')}. {translate('allRightsReserved')}</p>
+                <p>{translate('termsAndConditions')} | {translate('privacyPolicy')}</p>
               </div>
             }
         >
           <section className={styles.intro}>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>{translate('introText1')}</p>
+            <p>{translate('introText2')}</p>
+            <p>{translate('introText3')}</p>
           </section>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.buttonGroup}>
@@ -82,9 +92,12 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
                 id="server"
                 value={server}
                 onChange={(e) => setServer(e)}
-                label="Serveur:"
+                label={translate('server')}
                 filtrable={true}
-                options={storedCapabilities && region !== '' ? storedCapabilities[region].map((server: ServerType) => ({ value: server.Slug, label: server.Name })) : []}
+                options={storedCapabilities && region !== '' ? storedCapabilities[region].map((server: ServerType) => ({
+                  value: server.Slug,
+                  label: server.Name
+                })) : []}
             />
             <Input
                 id="character"
@@ -93,32 +106,27 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
                 onChange={(e) => setCharacter(e.target.value)}
                 required
                 disabled={server === ''}
-                label="Character:"
+                label={translate('character')}
             />
             <Button type="submit" plain className={styles.button}>
-              Search
+              {translate('submit')}
             </Button>
           </form>
           <div className={styles.adContainer}>
-            Placer publicité ici
+            {translate('publicity')}
           </div>
         </Container>
       </Layout>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    let capabilities = await getCapabilities('fr_FR');
-    return {
-      props: { capabilities },
-    };
-  } catch (error) {
-    console.error('Failed to fetch capabilities:', error);
-    return {
-      props: { capabilities: null },
-    };
-  }
+export const getServerSideProps: GetServerSideProps = async () => {
+  const capabilities = await getCapabilities();
+  return {
+    props: {
+      capabilities,
+    },
+  };
 };
 
 export default Login;

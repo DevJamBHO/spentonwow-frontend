@@ -1,5 +1,5 @@
+// file: Dashboard.module.scss
 @import './variables.scss';
-//@import './Select.module.scss'; // Assurez-vous que le chemin est correct
 
 .dashboardLayout {
   display: flex;
@@ -63,10 +63,10 @@
   flex-direction: column;
   text-align: center;
   gap: 2rem;
-  //background-color: rgba(255, 255, 255, 0.9);
   color: $text-color;
   padding: 2rem;
   border-radius: $border-radius;
+  width: 100%; /* S'assurer de prendre toute la largeur disponible */
 }
 
 .amountDetails {
@@ -74,40 +74,13 @@
   justify-content: space-around;
   align-items: stretch;
   gap: 1rem;
-}
+  width: 100%;
+  flex-wrap: wrap;
 
-.card {
-  flex: 1;
-  padding: 20px;
-  border-radius: $border-radius;
-  box-shadow: 0 4px 6px $primary-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  //background-color: #fff;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
+  .cardContainer {
+    flex: 1 0 31%;
+    height: 250px; /* Hauteur uniforme pour toutes les cartes */
   }
-}
-
-.cardIcon {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  color: $accent-color;
-}
-
-.cardTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.cardValue {
-  font-size: 1.2rem;
-  color: #666;
 }
 
 .amountTitle {

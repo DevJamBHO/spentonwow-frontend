@@ -1,6 +1,7 @@
-// utils/apiService.ts
-import {apiFetch} from "@/utils/apiService";
+import { apiFetch } from "@/utils/apiService";
+import { getLanguage } from "@/utils/language";
 
-export const getCapabilities = async (lang: string) => {
+export const getCapabilities = () => {
+    const lang = getLanguage();
     return apiFetch(`/capabilities?lang=${lang}`);
 };

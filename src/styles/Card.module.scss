@@ -1,0 +1,72 @@
+// file: Card.module.scss
+@import './variables.scss';
+
+.cardContainer {
+  flex: 1;
+  perspective: 1000px;
+  margin: 0.5rem;
+  height: 250px; /* Hauteur fixe ou relative pour un design uniforme */
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: $border-radius;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px $shadow-color;
+  padding: 20px;
+}
+
+.cardFront {
+  background-color: $primary-color;
+  color: $text-color;
+}
+
+.cardBack {
+  background-color: $secondary-color;
+  color: $text-color;
+  transform: rotateY(180deg);
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.cardIcon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: $accent-color;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: $text-color;
+}
+
+.cardValue {
+  font-size: 1.2rem;
+  color: $text-color;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  padding: 10px;
+  text-align: center;
+}
