@@ -1,68 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import Card from '@/components/Card';
 import styles from '@/styles/Dashboard.module.scss';
-import { faHamburger, faCoins, faFilm } from '@fortawesome/free-solid-svg-icons';
-import { formatCurrency, formatGold } from '@/utils/formatCurrency';
-import { translate } from '@/utils/translate';
-import { Film, films } from '@/constants/films';
 import useSpentStore from "@/store/useSpentStore";
+import BurgerCard from "@/components/Dashboard/BurgerCard";
+import FilmCard from "@/components/Dashboard/FilmCard";
+import GoldCard from "@/components/Dashboard/GoldCard";
 
-interface CardListProps {
-    amountInEuros: number;
-}
-
-const CardList: React.FC<CardListProps> = ({ amountInEuros }) => {
-    const goldEquivalent = useSpentStore(state => state.goldEquivalent);
+const CardList: React.FC = () => {
+    useSpentStore(state => state.fetchSpentData);
+    useSpentStore(state => state.amountInCurrentCurrency);
     const currency = useSpentStore(state => state.currency);
 
-    const [delayedGoldEquivalent, setDelayedGoldEquivalent] = useState<number>(0);
+    const [localAmountEur, setLocalAmountEur] = useState<number>(0);
+    const [localAmountUsd, setLocalAmountUsd] = useState<number>(0);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            if (goldEquivalent !== 0) {
-                setDelayedGoldEquivalent(goldEquivalent);
-            }
+            const currentAmountEur = useSpentStore.getState().amountEur;
+            const currentAmountUsd = useSpentStore.getState().amountUsd;
+            setLocalAmountEur(currentAmountEur);
+            setLocalAmountUsd(currentAmountUsd);
         }, 100);
 
         return () => clearTimeout(timeoutId);
-    }, [goldEquivalent]);
+    }, [useSpentStore.getState().amountEur, useSpentStore.getState().amountUsd]);
 
-    const calculateBigMacIndex = (amount: number) => {
-        const bigMacPrice = currency === 'USD' ? 5.65 : 4.30;
-        return (amount / bigMacPrice).toFixed(2);
-    };
-
-    const calculateFilmEquivalent = (amount: number, film: Film) => {
-        const costInEUR = film.price / (currency === 'USD' ? 1.2 : 1);
-        const percentage = ((amount / costInEUR) * 100).toFixed(6);
-        return `${percentage} ${translate('ofProductionCost')} ${film.name}`;
-    };
-
-    const [selectedFilm, setSelectedFilm] = useState<Film>(films[0]);
-    useEffect(() => {
-        const randomFilm = films[Math.floor(Math.random() * films.length)];
-        setSelectedFilm(randomFilm);
-    }, []);
+    const amountToUse = currency === 'USD' ? localAmountUsd : localAmountEur;
 
     return (
         <div className={styles.cardList}>
-            <Card
-                icon={faHamburger}
-                title={translate('bigMacEquivalent')}
-                value={`${calculateBigMacIndex(amountInEuros)} Big Macs`}
-                description={`${translate('bigMacPriceInfo')} (${formatCurrency(4.30, { currency })})`}
+            <BurgerCard
+                amountToUse={amountToUse}
+                currency={currency}
             />
-            <Card
-                icon={faCoins}
-                title={translate('goldCoinsEquivalent')}
-                value={formatGold(delayedGoldEquivalent)}
-                description={`${translate('amountSpentSince')} ${formatCurrency(amountInEuros, { currency })} en pièces d'or WoW`}
+            <GoldCard
+                amountToUse={amountToUse}
+                currency={currency}
             />
-            <Card
-                icon={faFilm}
-                title={translate('filmProductionCost')}
-                value={calculateFilmEquivalent(amountInEuros, selectedFilm)}
-                description={`${translate('ofProductionCost')} ${selectedFilm.name} (${formatCurrency(selectedFilm.price, { currency })})`}
+            <FilmCard
+                amountToUse={amountToUse}
+                currency={currency}
             />
         </div>
     );

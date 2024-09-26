@@ -1,4 +1,4 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 interface TokenState {
     tokenPriceInRealMoney: number;
@@ -10,8 +10,10 @@ interface TokenState {
 const useTokenStore = create<TokenState>((set) => ({
     tokenPriceInRealMoney: 0,
     goldPerToken: 200000,
-    setTokenPriceInRealMoney: (price: number) => set(state => ({ tokenPriceInRealMoney: price })),
-    setGoldPerToken: (amount: number) => set(state => ({ goldPerToken: amount })),
+    setTokenPriceInRealMoney: (price: number) => {
+        set({ tokenPriceInRealMoney: price });
+    },
+    setGoldPerToken: (amount: number) => set({ goldPerToken: amount }),
 }));
 
 export default useTokenStore;

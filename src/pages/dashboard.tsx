@@ -8,14 +8,13 @@ import Header from '@/components/Dashboard/Header';
 import AmountSection from '@/components/Dashboard/AmountSection';
 import CardList from '@/components/Dashboard/CardList';
 import styles from '@/styles/Dashboard.module.scss';
+import {translate} from "@/utils/translate";
 
 const Dashboard: React.FC = () => {
-    const [currency, setCurrency] = useState<string>('EUR');
     const [isClient, setIsClient] = useState<boolean>(false);
     const router = useRouter();
     const { region, server, character } = router.query;
 
-    const setResult = useSpentStore(state => state.setResult);
     const fetchSpentData = useSpentStore(state => state.fetchSpentData);
 
     useEffect(() => {
@@ -28,10 +27,7 @@ const Dashboard: React.FC = () => {
         if (region && server && character) {
             fetchSpentData(region, server, character);
         }
-    }, [region, server, character, setResult]);
-
-
-    const amountInEuros = 500;
+    }, [region, server, character]);
 
     if (!isClient) {
         return null;
@@ -42,16 +38,12 @@ const Dashboard: React.FC = () => {
             <div className={styles.amountDetails}>
                 <Container className={styles.mainContainer}>
                     <Header/>
-                    <AmountSection
-                        amountInEuros={amountInEuros}
-                    />
-                    <CardList
-                        amountInEuros={amountInEuros}
-                    />
+                    <AmountSection />
+                    <CardList />
                 </Container>
                 <div className={styles.sideContainers}>
                     <Container className={styles.sideContainer}>
-                        dfef
+                        {translate('publicity')}
                     </Container>
                     <Container className={styles.sideContainer}>
                         <h2>TODO</h2>
