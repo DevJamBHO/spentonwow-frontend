@@ -4,6 +4,7 @@ import useSpentStore from "@/store/useSpentStore";
 import BurgerCard from "@/components/Dashboard/BurgerCard";
 import FilmCard from "@/components/Dashboard/FilmCard";
 import GoldCard from "@/components/Dashboard/GoldCard";
+import Loading from "@/components/Loading";
 
 const CardList: React.FC = () => {
     useSpentStore(state => state.fetchSpentData);
@@ -25,6 +26,12 @@ const CardList: React.FC = () => {
     }, [useSpentStore.getState().amountEur, useSpentStore.getState().amountUsd]);
 
     const amountToUse = currency === 'USD' ? localAmountUsd : localAmountEur;
+
+    if (amountToUse === 0) {
+        return(
+            <Loading />
+        )
+    }
 
     return (
         <div className={styles.cardList}>

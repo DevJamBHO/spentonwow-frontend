@@ -45,7 +45,7 @@
 .siteName {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: $space-small;
   flex: 0 0 80%;
   text-align: center;
 }
@@ -61,24 +61,24 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  gap: 2rem;
+  gap: $space-medium;
   color: $text-color;
-  padding: 2rem;
+  padding: $space-medium;
   border-radius: $border-radius;
-  width: 100%; /* S'assurer de prendre toute la largeur disponible */
+  width: 100%;
 }
 
 .amountDetails {
   display: flex;
   justify-content: space-around;
   align-items: stretch;
-  gap: 1rem;
+  gap: $space-big;
   width: 100%;
   flex-wrap: wrap;
 
   .cardContainer {
     flex: 1 0 31%;
-    height: 250px; /* Hauteur uniforme pour toutes les cartes */
+    height: 250px;
   }
 }
 
@@ -90,12 +90,12 @@
 }
 
 .amountTitle {
-  font-size: 2rem;
+  font-size: $space-medium;
   font-weight: bold;
   color: $text-color;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: $space-small;
 }
 
 .amountTitleIcon {

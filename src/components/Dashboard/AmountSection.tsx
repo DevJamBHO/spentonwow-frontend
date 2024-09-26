@@ -3,6 +3,7 @@ import styles from '@/styles/Dashboard.module.scss';
 import { translate } from '@/utils/translate';
 import { formatCurrency } from "@/utils/formatCurrency";
 import useSpentStore from "@/store/useSpentStore";
+import Loading from "@/components/Loading";
 
 const AmountSection: React.FC = () => {
     const currency = useSpentStore(state => state.currency);
@@ -24,6 +25,12 @@ const AmountSection: React.FC = () => {
 
     useEffect(() => {
     }, [localAmountEur, localAmountUsd]);
+
+    if (amountToUse === 0) {
+        return(
+            <Loading />
+        )
+    }
 
     return (
         <div className={styles.amountSection}>
