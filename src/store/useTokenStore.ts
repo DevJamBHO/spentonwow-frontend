@@ -8,8 +8,8 @@ interface TokenState {
 }
 
 const useTokenStore = create<TokenState>((set) => ({
-    tokenPriceInRealMoney: 20, // Exemple de prix initial en euros ou dollars
-    goldPerToken: 200000, // Exemple de montant initial d'or par token
+    tokenPriceInRealMoney: 0,
+    goldPerToken: 200000,
     setTokenPriceInRealMoney: (price: number) => set(state => ({ tokenPriceInRealMoney: price })),
     setGoldPerToken: (amount: number) => set(state => ({ goldPerToken: amount })),
 }));

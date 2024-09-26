@@ -14,8 +14,7 @@ const useCapabilitiesStore = create<AppState>((set) => ({
             return capabilities;
         }
 
-        // Grouping servers by region
-        const groupedByRegion = capabilities.servers.reduce((acc: any, server: any) => {
+        return capabilities.servers.reduce((acc: any, server: any) => {
             const { Region } = server;
             if (!acc[Region]) {
                 acc[Region] = [];
@@ -23,10 +22,6 @@ const useCapabilitiesStore = create<AppState>((set) => ({
             acc[Region].push(server);
             return acc;
         }, {});
-
-        console.log('olb',groupedByRegion )
-
-        return groupedByRegion;
     }
 }));
 

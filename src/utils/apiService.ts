@@ -1,6 +1,6 @@
 // utils/apiService.ts
 export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
-    const baseUrl = 'https://api.wowchievement.com';
+    const baseUrl = 'https://staging.api.wowchievement.com';
     const url = `${baseUrl}${endpoint}`;
 
     const defaultOptions: RequestInit = {

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import 'animate.css/animate.min.css'; // Import animate.css
 import Layout from '../layouts/Layout';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -11,6 +10,7 @@ import useCapabilitiesStore from '@/store/useCapabilitiesStore';
 import { GetServerSideProps } from "next";
 import { getCapabilities } from "@/api/capabilities";
 import { translate } from '@/utils/translate';
+import { apiFetch } from '@/utils/apiService';
 
 interface LoginProps {
   capabilities: any;
@@ -43,15 +43,12 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
 
   const handleRegionSelect = (selectedRegion: string) => {
     setRegion(selectedRegion);
-    setServer(''); // Reset server if region changes
+    setServer('');
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('server:', server);
-    console.log('region:', region);
-    console.log('character:', character);
-    router.push('/dashboard');
+    router.push(`/dashboard?region=${region}&server=${server}&character=${character}`);
   };
 
   if (!isClient) {

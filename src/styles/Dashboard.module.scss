@@ -1,4 +1,3 @@
-// file: Dashboard.module.scss
 @import './variables.scss';
 
 .dashboardLayout {
@@ -81,6 +80,13 @@
     flex: 1 0 31%;
     height: 250px; /* Hauteur uniforme pour toutes les cartes */
   }
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: $space-medium;
 }
 
 .amountTitle {
