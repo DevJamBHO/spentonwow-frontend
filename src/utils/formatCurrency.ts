@@ -7,8 +7,7 @@ interface FormatCurrencyOptions {
 
 const currencyLocaleMap: { [key: string]: string } = {
     'USD': 'en-US',
-    'EUR': 'fr-FR', // La locale française gère correctement l'Euro
-    // Ajouter d'autres devises et locales si nécessaire
+    'EUR': 'fr-FR',
 };
 
 export const formatCurrency = (
@@ -32,9 +31,20 @@ export const formatCurrency = (
 };
 
 export const formatGold = (amount: number): string => {
-    const gold = Math.floor(amount / 10000);
-    const silver = Math.floor((amount % 10000) / 100);
-    const copper = amount % 100;
+    const gold = Math.floor(amount);
+    let formattedGold = '';
 
-    return `${gold}g ${silver}s ${copper}c`;
+    if (gold >= 1_000_000_000_000) {
+        formattedGold = (gold / 1_000_000_000_000).toFixed(1) + 'T'; // Trillions
+    } else if (gold >= 1_000_000_000) {
+        formattedGold = (gold / 1_000_000_000).toFixed(1) + 'B'; // Billions
+    } else if (gold >= 1_000_000) {
+        formattedGold = (gold / 1_000_000).toFixed(1) + 'M'; // Millions
+    } else if (gold >= 1_000) {
+        formattedGold = (gold / 1_000).toFixed(1) + 'k'; // Thousands
+    } else {
+        formattedGold = gold.toString();
+    }
+
+    return `${formattedGold}g`;
 };

@@ -12,11 +12,14 @@ const AmountSection: React.FC = () => {
     const [localAmountEur, setLocalAmountEur] = useState<number>(0);
     const [localAmountUsd, setLocalAmountUsd] = useState<number>(0);
 
+    // Hook for updating local amounts
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
+        const updateAmounts = () => {
             setLocalAmountEur(useSpentStore.getState().amountEur);
             setLocalAmountUsd(useSpentStore.getState().amountUsd);
-        }, 100); // Delay to ensure state is updated
+        };
+
+        const timeoutId = setTimeout(updateAmounts, 100); // Initial delay to ensure state is updated
 
         return () => clearTimeout(timeoutId);
     }, [useSpentStore.getState().amountEur, useSpentStore.getState().amountUsd]);
@@ -24,18 +27,26 @@ const AmountSection: React.FC = () => {
     const amountToUse = currency === 'USD' ? localAmountUsd : localAmountEur;
 
     useEffect(() => {
-    }, [localAmountEur, localAmountUsd]);
+        if (amountToUse === 0) {
+            const intervalId = setInterval(() => {
+                setLocalAmountEur(useSpentStore.getState().amountEur);
+                setLocalAmountUsd(useSpentStore.getState().amountUsd);
+            }, 100);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [amountToUse]);
 
     if (amountToUse === 0) {
-        return(
+        return (
             <Loading />
-        )
+        );
     }
 
     return (
         <div className={styles.amountSection}>
             <div className={styles.amountTitle}>
-                {translate('amountSpentSince')}&nbsp;{formatCurrency(amountToUse, { currency })}
+                {translate('amountSpentSince')}&nbsp;<span className={styles.price}>{formatCurrency(amountToUse, { currency })}</span>
             </div>
         </div>
     );

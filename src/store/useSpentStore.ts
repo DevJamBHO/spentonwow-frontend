@@ -22,7 +22,9 @@ const useSpentStore = create<SpentState>((set, get) => ({
             const data = await apiFetch(endpoint);
 
             const setTokenPrice = useTokenStore.getState().setTokenPriceInRealMoney;
-            setTokenPrice(data.token.gold_cost);
+            const setGoldPrice = useTokenStore.getState().setGoldPerToken;
+            setGoldPrice(data.token.gold_cost);
+            setTokenPrice(data.token.cost);
 
             set(state => ({
                 ...state,

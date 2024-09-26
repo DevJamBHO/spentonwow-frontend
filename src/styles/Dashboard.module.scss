@@ -96,6 +96,9 @@
   display: flex;
   align-items: center;
   gap: $space-small;
+  .price {
+    color: $highlight-color;
+  }
 }
 
 .amountTitleIcon {

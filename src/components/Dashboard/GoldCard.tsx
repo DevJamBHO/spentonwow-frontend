@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {faCoins} from "@fortawesome/free-solid-svg-icons";
 import {translate} from "@/utils/translate";
 import {formatCurrency, formatGold} from "@/utils/formatCurrency";
 import Card from "@/components/Card";
 import useTokenStore from "@/store/useTokenStore";
+import {convertMoneyToGold} from "@/utils/conversion";
 
 interface GoldCardProps {
     amountToUse: number;
@@ -11,25 +12,15 @@ interface GoldCardProps {
 }
 
 const GoldCard: React.FC<GoldCardProps> = ({amountToUse, currency}) => {
-    const [localGoldEquivalent, setLocalGoldEquivalent] = useState<number>(0);
-    const goldEquivalentFromStore = useTokenStore(state => state.tokenPriceInRealMoney);
-
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (goldEquivalentFromStore !== undefined && goldEquivalentFromStore !== null) {
-                setLocalGoldEquivalent(goldEquivalentFromStore);
-            }
-        }, 100);
-
-        return () => clearTimeout(timeoutId);
-    }, [goldEquivalentFromStore]);
+    const tokenPriceInRealMoney = useTokenStore(state => state.tokenPriceInRealMoney);
+    const goldPerToken = useTokenStore(state => state.goldPerToken);
 
     return(
         <Card
             icon={faCoins}
             title={translate('goldCoinsEquivalent')}
-            value={formatGold(localGoldEquivalent)}
-            description={`${translate('amountSpentSince')} ${formatCurrency(amountToUse, { currency })} en pièces d'or WoW`}
+            value={formatGold(convertMoneyToGold(amountToUse, currency))}
+            description={`(${formatCurrency(amountToUse, { currency })} / ${currency === 'USD' ? tokenPriceInRealMoney.dol : tokenPriceInRealMoney.eur}) x ${goldPerToken}`}
         />
     )
 };

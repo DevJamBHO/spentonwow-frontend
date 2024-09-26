@@ -14,23 +14,37 @@ const CardList: React.FC = () => {
     const [localAmountEur, setLocalAmountEur] = useState<number>(0);
     const [localAmountUsd, setLocalAmountUsd] = useState<number>(0);
 
+    // Hook for updating local amounts
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
+        const updateAmounts = () => {
             const currentAmountEur = useSpentStore.getState().amountEur;
             const currentAmountUsd = useSpentStore.getState().amountUsd;
             setLocalAmountEur(currentAmountEur);
             setLocalAmountUsd(currentAmountUsd);
-        }, 100);
+        };
+
+        const timeoutId = setTimeout(updateAmounts, 100); // Initial delay to ensure state is updated
 
         return () => clearTimeout(timeoutId);
     }, [useSpentStore.getState().amountEur, useSpentStore.getState().amountUsd]);
 
     const amountToUse = currency === 'USD' ? localAmountUsd : localAmountEur;
 
+    useEffect(() => {
+        if (amountToUse === 0) {
+            const intervalId = setInterval(() => {
+                setLocalAmountEur(useSpentStore.getState().amountEur);
+                setLocalAmountUsd(useSpentStore.getState().amountUsd);
+            }, 100);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [amountToUse]);
+
     if (amountToUse === 0) {
-        return(
+        return (
             <Loading />
-        )
+        );
     }
 
     return (
