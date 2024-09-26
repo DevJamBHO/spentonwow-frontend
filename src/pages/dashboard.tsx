@@ -9,6 +9,7 @@ import AmountSection from '@/components/Dashboard/AmountSection';
 import CardList from '@/components/Dashboard/CardList';
 import styles from '@/styles/Dashboard.module.scss';
 import {translate} from "@/utils/translate";
+import Details from "@/components/Dashboard/Details";
 
 const Dashboard: React.FC = () => {
     const [isClient, setIsClient] = useState<boolean>(false);
@@ -36,11 +37,16 @@ const Dashboard: React.FC = () => {
     return (
         <Layout big>
             <div className={styles.amountDetails}>
-                <Container className={styles.mainContainer}>
-                    <Header/>
-                    <AmountSection />
-                    <CardList />
-                </Container>
+                <div className={styles.mainContainer}>
+                    <Container className={styles.mainContainer}>
+                        <Header/>
+                        <AmountSection />
+                        <CardList />
+                    </Container>
+                    <Container className={styles.mainContainer}>
+                        <Details />
+                    </Container>
+                </div>
                 <div className={styles.sideContainers}>
                     <Container className={styles.sideContainer}>
                         {translate('publicity')}

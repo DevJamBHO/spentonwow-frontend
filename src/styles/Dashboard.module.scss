@@ -9,65 +9,6 @@
   }
 }
 
-.mainContainer {
-  flex: 7;
-
-  @media (max-width: 768px) {
-    flex: 1;
-    width: 100%;
-  }
-}
-
-.sideContainers {
-  display: flex;
-  flex: 3;
-  flex-direction: column;
-  gap: $space-big;
-
-  @media (max-width: 768px) {
-    width: 100%;
-
-    .sideContainer {
-      flex: 1;
-    }
-  }
-}
-
-.sideContainer {
-  flex: 1;
-}
-
-.headerContainer {
-  display: flex;
-  align-items: center;
-}
-
-.siteName {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: $space-small;
-  flex: 0 0 80%;
-  text-align: center;
-}
-
-.currencySelect {
-  flex: 0 0 20%;
-  text-align: right;
-}
-
-.amountSection {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  gap: $space-medium;
-  color: $text-color;
-  padding: $space-medium;
-  border-radius: $border-radius;
-  width: 100%;
-}
-
 .amountDetails {
   display: flex;
   justify-content: space-around;
@@ -76,43 +17,106 @@
   width: 100%;
   flex-wrap: wrap;
 
-  .cardContainer {
-    flex: 1 0 31%;
-    height: 250px;
+  .mainContainer {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+    gap: $space-big;
+
+    @media (max-width: 768px) {
+      flex: 1;
+      width: 100%;
+    }
+
+    .headerContainer {
+      display: flex;
+      align-items: center;
+
+      .siteName {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: $space-small;
+        flex: 0 0 80%;
+        text-align: center;
+      }
+
+      .currencySelect {
+        flex: 0 0 20%;
+        text-align: right;
+      }
+    }
+
+    .amountSection {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      gap: $space-medium;
+      color: $text-color;
+      padding: $space-medium;
+      border-radius: $border-radius;
+      width: 100%;
+
+      .amountTitle {
+        font-size: $space-medium;
+        font-weight: bold;
+        color: $text-color;
+        display: flex;
+        align-items: center;
+        gap: $space-small;
+
+        .price {
+          color: $highlight-color;
+        }
+      }
+
+      .amountTitleIcon {
+        font-size: 1.5rem;
+        color: $secondary-color;
+      }
+
+      .amount {
+        font-size: 3rem;
+        font-weight: bold;
+        color: $highlight-color;
+        text-shadow: 1px 1px 2px #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .cardList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: $space-medium;
+
+      .cardContainer {
+        flex: 1 0 31%;
+        height: 250px;
+      }
+    }
   }
-}
 
-.cardList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: $space-medium;
-}
+  .sideContainers {
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    gap: $space-big;
 
-.amountTitle {
-  font-size: $space-medium;
-  font-weight: bold;
-  color: $text-color;
-  display: flex;
-  align-items: center;
-  gap: $space-small;
-  .price {
-    color: $highlight-color;
+    @media (max-width: 768px) {
+      width: 100%;
+
+      .sideContainer {
+        flex: 1;
+      }
+    }
+
+    .sideContainer {
+      flex: 1;
+    }
   }
-}
-
-.amountTitleIcon {
-  font-size: 1.5rem;
-  color: $secondary-color;
-}
-
-.amount {
-  font-size: 3rem;
-  font-weight: bold;
-  color: $highlight-color;
-  text-shadow: 1px 1px 2px #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
 }
