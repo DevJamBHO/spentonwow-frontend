@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spentonwow-frontend
+  namespace: {{ .Values.env }}-spentonwow-frontend
+  labels:
+    app: {{ .Values.env }}-spentonwow-frontend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.env }}-spentonwow-frontend
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.env }}-spentonwow-frontend
+    spec:
+      imagePullSecrets:
+        - name: docker-pull-secret
+      containers:
+      - name: spentonwow-frontend
+        image: bastienbellion/spentonwow-frontend:{{ .Values.imageTag }}
+        ports:
+        - containerPort: 5173

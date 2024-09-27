@@ -1,0 +1,3 @@
+env: staging
+imageTag: latest
+replicaCount: 3

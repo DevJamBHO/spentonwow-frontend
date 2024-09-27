@@ -1,0 +1,130 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main", "staging" ]
+
+jobs:
+
+  # Job 1: Build and Push Docker Image
+  build-and-push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5  # Add a 5-minute timeout
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up branch and timestamp
+      id: set-vars
+      run: |
+        BRANCH_NAME=$(echo "${GITHUB_REF##*/}")
+        TIMESTAMP=$(date +'%Y%m%d-%H%M')
+        DOCKER_TAG="${BRANCH_NAME}-${TIMESTAMP}"
+        echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+        echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+        echo "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_ENV
+        echo "::set-output name=docker_tag::${DOCKER_TAG}"
+
+    - name: Set REACT_APP_BASE_URL based on branch
+      run: |
+        if [[ "${GITHUB_REF##*/}" == "main" ]]; then
+          echo "REACT_APP_BASE_URL=https://api.wowchievement.com" >> $GITHUB_ENV
+        elif [[ "${GITHUB_REF##*/}" == "staging" ]]; then
+          echo "REACT_APP_BASE_URL=https://staging.api.wowchievement.com" >> $GITHUB_ENV
+        else
+          echo "Branch is not main or staging. Exiting."
+          exit 1
+        fi
+
+    - name: Update .env file
+      run: |
+        echo "REACT_APP_BASE_URL=${{ env.REACT_APP_BASE_URL }}" > .env
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }}
+        docker tag wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }} ${{ secrets.DOCKER_HUB_USERNAME }}/wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }}
+
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }}
+
+    outputs:
+      docker_tag: ${{ steps.set-vars.outputs.docker_tag }}
+
+  # Job 2: Update Terraform Cloud variable and manage the plan
+  update-terraform-variable:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    timeout-minutes: 5  # Add a 5-minute timeout
+
+    steps:
+    - name: Set Terraform workspace based on branch
+      id: set-workspace
+      run: |
+        if [[ "${GITHUB_REF##*/}" == "main" ]]; then
+          echo "WORKSPACE=wowspent-frontend-prod" >> $GITHUB_ENV
+        elif [[ "${GITHUB_REF##*/}" == "staging" ]]; then
+          echo "WORKSPACE=wowspent-frontend-staging" >> $GITHUB_ENV
+        else
+          echo "Branch is not main or staging. Exiting."
+          exit 1
+        fi
+
+    - name: Update Terraform Cloud Variable
+      uses: patrontech/devops-tf-cloud-update-var@v1.0.1
+      with:  
+        workSpaceName: ${{ env.WORKSPACE }}  # Use the workspace from the previous step
+        organizationName: wowchievement
+        terraformToken: ${{ secrets.TERRAFORM_TOKEN }}
+        terraformHost: 'app.terraform.io'
+        variableName: 'image_tag'
+        variableValue: ${{ needs.build-and-push.outputs.docker_tag }}
+
+    - name: Trigger Terraform Plan
+      uses: sarathkrish/invoke-terraform-run-api@v1.0
+      id: plan
+      with:  
+        workSpaceName: ${{ env.WORKSPACE }}  # Use the workspace from the previous step
+        organizationName: wowchievement
+        terraformToken: ${{ secrets.TERRAFORM_TOKEN }}
+        terraformHost: 'app.terraform.io'
+        isDestroy: false
+        message: 'GitHub Actions'
+
+    - name: Check Terraform Run Status until planned or error
+      id: check-status
+      run: |
+        for i in {1..10}; do
+          echo "Checking run status... attempt $i"
+          run_status=$(curl -s \
+            --header "Authorization: Bearer ${{ secrets.TERRAFORM_TOKEN }}" \
+            --url "https://app.terraform.io/api/v2/runs/${{ steps.plan.outputs.runId }}" | jq -r .data.attributes.status)
+
+          echo "Run status: $run_status"
+          if [[ "$run_status" == "planned" || "$run_status" == "planned_and_finished" ]]; then
+            echo "::set-output name=run_status::$run_status"
+            exit 0
+          elif [[ "$run_status" == "errored" ]]; then
+            echo "::set-output name=run_status::errored"
+            exit 1
+          else
+            sleep 30  # Wait for 30 seconds before retrying
+          fi
+        done
+        echo "Run did not reach 'planned' or 'errored' status within the retry limit."
+        exit 1
+
+    # Conditionally apply if status is planned and not planned_and_finished
+    - name: Apply Terraform if Plan is Ready
+      if: ${{ steps.check-status.outputs.run_status == 'planned' }}
+      uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.3.1
+      id: apply
+      with:
+        run: ${{ steps.plan.outputs.runId }}
+        comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
+        token: ${{ secrets.TERRAFORM_TOKEN }}
+        hostname: 'app.terraform.io'
+        organization: wowchievement
