@@ -18,39 +18,14 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
             setVideoSupported(false);
             return;
         }
-
-        const handleVideoEnd = () => {
-            reverse.current = !reverse.current;
-            if (reverse.current) {
-                playVideoBackward();
-            } else {
-                video.play();
-            }
-        };
-
         const handleVideoError = () => {
             setVideoSupported(false);
         };
 
-        const playVideoBackward = () => {
-            video.pause();
-            const interval = setInterval(() => {
-                if (video.currentTime <= 0) {
-                    clearInterval(interval);
-                    reverse.current = !reverse.current;
-                    video.play();
-                } else {
-                    video.currentTime -= 0.1;
-                }
-            }, 100);
-        };
-
-        video.addEventListener('ended', handleVideoEnd);
         video.addEventListener('error', handleVideoError);
         video.play();
 
         return () => {
-            video.removeEventListener('ended', handleVideoEnd);
             video.removeEventListener('error', handleVideoError);
         };
     }, []);

@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+}
+
+.detailsBlurred {
+  filter: blur(10px);
+  pointer-events: none;
+
+  p {
+    text-align: left;
+  }
+}
+
+.subscription, .extensions, .shop {
+  margin-top: 20px;
+}
+
+.subscription-item, .shop-item {
+  height: 20px;
+  background: linear-gradient(90deg, $primary-color 25%, $secondary-color 50%, $primary-color 75%);
+  background-size: 200% 100%;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.warning {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  filter: none;
+}

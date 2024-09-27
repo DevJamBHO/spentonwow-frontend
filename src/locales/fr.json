@@ -23,6 +23,7 @@
   "hideItems": "Masquer",
   "showItems": "article(s) non possédé(s)",
   "notOwned": "non possédé",
+  "removeAdblock": "Les détails sont en phase d'invisibilité ! Désactive ton bloqueur de pubs pour qu'ils apparaissent.",
   "films": {
     "avengersEndgame": "Avengers: Endgame",
     "avatar": "Avatar",

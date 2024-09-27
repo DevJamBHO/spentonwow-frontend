@@ -10,9 +10,12 @@ import CardList from '@/components/Dashboard/CardList';
 import styles from '@/styles/Dashboard.module.scss';
 import { translate } from "@/utils/translate";
 import Details from "@/components/Dashboard/Details";
+import FakeDetails from "@/components/Dashboard/FakeDetails"; // Assurez-vous de l'ajouter correctement
+import AdBlockDetector from '@/components/AdBlockDetector'; // Assurez-vous de l'ajouter correctement
 
 const Dashboard: React.FC = () => {
     const [isClient, setIsClient] = useState<boolean>(false);
+    const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
     const router = useRouter();
     const { region, server, character } = router.query;
 
@@ -36,6 +39,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <Layout big>
+            <AdBlockDetector onDetect={setAdBlockDetected} />
             <div className={styles.amountDetails}>
                 <div className={styles.mainContainer}>
                     <Container className={styles.mainContainer}>
@@ -44,7 +48,11 @@ const Dashboard: React.FC = () => {
                         <CardList />
                     </Container>
                     <Container className={styles.mainContainer}>
-                        <Details />
+                        {adBlockDetected ? (
+                            <FakeDetails />
+                        ) : (
+                            <Details />
+                        )}
                     </Container>
                 </div>
                 <div className={styles.sideContainers}>
