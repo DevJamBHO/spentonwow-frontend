@@ -21,7 +21,7 @@ const Header: React.FC = () => {
             <Select
                 id="currency-select"
                 value={currency}
-                onChange={(value: string) => setCurrency(value as Currency)} // Cast String to Currency
+                onChange={setCurrency} // Cast String to Currency
                 options={currencyOptions}
                 className={styles.currencySelect}
                 hideLabel={true}
