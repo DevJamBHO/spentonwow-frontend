@@ -25,12 +25,12 @@ jobs:
         echo "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_ENV
         echo "::set-output name=docker_tag::${DOCKER_TAG}"
 
-    - name: Set REACT_APP_BASE_URL based on branch
+    - name: Set NEXT_PUBLIC_BASE_URL based on branch
       run: |
         if [[ "${GITHUB_REF##*/}" == "main" ]]; then
-          echo "REACT_APP_BASE_URL=https://api.wowchievement.com" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_BASE_URL=https://api.wowchievement.com" >> $GITHUB_ENV
         elif [[ "${GITHUB_REF##*/}" == "staging" ]]; then
-          echo "REACT_APP_BASE_URL=https://staging.api.wowchievement.com" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_BASE_URL=https://staging.api.wowchievement.com" >> $GITHUB_ENV
         else
           echo "Branch is not main or staging. Exiting."
           exit 1
@@ -38,18 +38,18 @@ jobs:
 
     - name: Update .env file
       run: |
-        echo "REACT_APP_BASE_URL=${{ env.REACT_APP_BASE_URL }}" > .env
+        echo "NEXT_PUBLIC_BASE_URL=${{ env.NEXT_PUBLIC_BASE_URL }}" > .env.local
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }}
-        docker tag wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }} ${{ secrets.DOCKER_HUB_USERNAME }}/wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }}
+        docker build . --file Dockerfile --tag spentonwow-frontend:${{ steps.set-vars.outputs.docker_tag }}
+        docker tag spentonwow-frontend:${{ steps.set-vars.outputs.docker_tag }} ${{ secrets.DOCKER_HUB_USERNAME }}/spentonwow-frontend:${{ steps.set-vars.outputs.docker_tag }}
 
     - name: Push Docker image to Docker Hub
-      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/wowspent-frontend:${{ steps.set-vars.outputs.docker_tag }}
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/spentonwow-frontend:${{ steps.set-vars.outputs.docker_tag }}
 
     outputs:
       docker_tag: ${{ steps.set-vars.outputs.docker_tag }}
@@ -65,9 +65,9 @@ jobs:
       id: set-workspace
       run: |
         if [[ "${GITHUB_REF##*/}" == "main" ]]; then
-          echo "WORKSPACE=wowspent-frontend-prod" >> $GITHUB_ENV
+          echo "WORKSPACE=spentonwow-frontend-prod" >> $GITHUB_ENV
         elif [[ "${GITHUB_REF##*/}" == "staging" ]]; then
-          echo "WORKSPACE=wowspent-frontend-staging" >> $GITHUB_ENV
+          echo "WORKSPACE=spentonwow-frontend-staging" >> $GITHUB_ENV
         else
           echo "Branch is not main or staging. Exiting."
           exit 1
