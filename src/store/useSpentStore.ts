@@ -6,25 +6,39 @@ interface SpentState {
     currency: "EUR" | "USD";
     amountEur: number;
     amountUsd: number;
+    amountInCurrentCurrency: number;
+    extensions: Array<spentDetail>;
+    shop: {mount: Array<spentDetail>, pet: Array<spentDetail>};
+    subscription: subscriptionDetail;
     setCurrency: (value: "EUR" | "USD") => void;
     fetchSpentData: (region: string | string[], server: string | string[], character: string | string[]) => Promise<void>;
-    amountInCurrentCurrency: number;
 }
 
 const useSpentStore = create<SpentState>((set, get) => ({
     currency: 'EUR',
     amountEur: 0,
     amountUsd: 0 ,
+    extensions: [],
+    shop: {mount: [], pet: []},
+    subscription: {
+        estimated_cost: {eur: 0, dol: 0},
+        estimated_months: 0
+    },
     setCurrency: (value) => set({ currency: value }),
     fetchSpentData: async (region, server, character) => {
         const endpoint = `/spent/${region}?character=${server},${character}`;
         try {
             const data = await apiFetch(endpoint);
+            const state = get();
 
             const setTokenPrice = useTokenStore.getState().setTokenPriceInRealMoney;
             const setGoldPrice = useTokenStore.getState().setGoldPerToken;
+
             setGoldPrice(data.token.gold_cost);
             setTokenPrice(data.token.cost);
+            state.shop = data.shop
+            state.subscription = data.subscription
+            state.extensions = data.extensions
 
             set(state => ({
                 ...state,

@@ -16,6 +16,13 @@
   "server": "Serveur:",
   "character": "Personnage:",
   "submit": "Soumettre",
+  "subscription": "Abonnement",
+  "months": "mois",
+  "extensions": "Extensions",
+  "shop": "Boutique",
+  "hideItems": "Masquer",
+  "showItems": "article(s) non possédé(s)",
+  "notOwned": "non possédé",
   "films": {
     "avengersEndgame": "Avengers: Endgame",
     "avatar": "Avatar",

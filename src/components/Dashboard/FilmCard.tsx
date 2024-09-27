@@ -29,7 +29,7 @@ const FilmCard: React.FC<FilmCardProps> = ({amountToUse, currency}) => {
             icon={faFilm}
             title={translate('filmProductionCost')}
             value={calculateFilmEquivalent(amountToUse, selectedFilm)}
-            description={`${translate('ofProductionCost')} ${selectedFilm.name} (${formatCurrency(selectedFilm.price, { currency })})}`}
+            description={`${translate('ofProductionCost')} ${selectedFilm.name} (${formatCurrency(selectedFilm.price, { currency })})`}
         />
     )
 };

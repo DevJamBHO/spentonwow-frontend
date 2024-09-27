@@ -16,6 +16,13 @@
   "server": "Server:",
   "character": "Character:",
   "submit": "Submit",
+  "subscription": "Subscription",
+  "months": "months",
+  "extensions": "Extensions",
+  "shop": "Shop",
+  "hideItems": "Hide",
+  "showItems": "item(s) not owned",
+  "notOwned": "not owned",
   "films": {
     "avengersEndgame": "Avengers: Endgame",
     "avatar": "Avatar",

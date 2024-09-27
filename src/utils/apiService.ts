@@ -1,6 +1,7 @@
-// utils/apiService.ts
 export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
-    const baseUrl = process.env.REACT_APP_BASE_URL;  // Default to empty string if not set
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    console.log("Base URL:", baseUrl);
+
     const url = `${baseUrl}${endpoint}`;
 
     const defaultOptions: RequestInit = {
