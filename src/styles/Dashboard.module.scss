@@ -111,14 +111,14 @@
       width: 100%;
 
       .sideContainer {
-        flex: none;  // Modifier ceci pour que la hauteur soit indépendante
-        height: auto;  // Permettre à la hauteur d'être définie automatiquement ou ajouter une valeur
+        flex: none;
+        height: auto;
       }
     }
 
     .sideContainer {
-      flex: none;  // Modifier ceci pour que la hauteur soit indépendante
-      height: auto;  // Permettre à la hauteur d'être définie automatiquement ou ajouter une valeur
+      flex: none;
+      height: auto;
     }
   }
 }

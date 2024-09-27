@@ -64,5 +64,11 @@
     "quantumSolace": "Quantum of Solace",
     "xmenDaysFuturePast": "X-Men: Days of Future Past",
     "warcraft": "Warcraft : Le Commencement"
+  },
+  "share": {
+    "title": "Brag de Raid",
+    "question": "Seuls les vrais champions d'Azeroth osent dévoiler leurs dépenses. Qu'en est-il de toi ?",
+    "twitter1": "J'ai osé regarder combien j'ai dépensé sur wow...",
+    "twitter2": "et toi, as-tu le courage d'affronter la vérité ?"
   }
 }

@@ -11,7 +11,8 @@ import styles from '@/styles/Dashboard.module.scss';
 import { translate } from "@/utils/translate";
 import Details from "@/components/Dashboard/Details";
 import FakeDetails from "@/components/Dashboard/FakeDetails"; // Assurez-vous de l'ajouter correctement
-import AdBlockDetector from '@/components/AdBlockDetector'; // Assurez-vous de l'ajouter correctement
+import AdBlockDetector from '@/components/AdBlockDetector';
+import Share from "@/components/Dashboard/Share"; // Assurez-vous de l'ajouter correctement
 
 const Dashboard: React.FC = () => {
     const [isClient, setIsClient] = useState<boolean>(false);
@@ -60,7 +61,7 @@ const Dashboard: React.FC = () => {
                         {translate('publicity')}
                     </Container>
                     <Container className={styles.sideContainer}>
-                        <h2>TODO</h2>
+                        <Share />
                     </Container>
                 </div>
             </div>
