@@ -70,5 +70,10 @@
     "question": "Only the true champions of Azeroth dare to reveal their spending. What about you?",
     "twitter1": "I dared to look at how much I've spent on WoW...",
     "twitter2": "and you, do you have the courage to face the truth?"
+  },
+  "wowchievement": {
+    "title": "Wowchievement",
+    "question1": "Want to track all your reputation and weekly quests? Visit",
+    "question2": "to stay on top of everything!"
   }
 }
