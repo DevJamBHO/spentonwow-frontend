@@ -1,11 +1,8 @@
-// file: Card.module.scss
-@import './variables.scss';
-
 .cardContainer {
   flex: 1;
   perspective: 1000px;
   margin: 0.5rem;
-  height: 250px; /* Hauteur fixe ou relative pour un design uniforme */
+  height: 250px;
 }
 
 .card {

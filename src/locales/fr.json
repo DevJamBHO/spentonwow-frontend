@@ -70,5 +70,10 @@
     "question": "Seuls les vrais champions d'Azeroth osent dévoiler leurs dépenses. Qu'en est-il de toi ?",
     "twitter1": "J'ai osé regarder combien j'ai dépensé sur wow...",
     "twitter2": "et toi, as-tu le courage d'affronter la vérité ?"
+  },
+  "wowchievement": {
+    "title": "Wowchievement",
+    "question1": "Envie de suivre toutes tes quêtes de réputation et hebdomadaires ? Visite",
+    "question2": "pour ne rien manquer !"
   }
 }

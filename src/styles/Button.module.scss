@@ -2,9 +2,9 @@
 
 .button {
   padding: 0.75rem 1.5rem;
-  border: none;  // Remove border
+  border: none;
   border-radius: $border-radius;
-  background: linear-gradient(135deg, $secondary-color, darken($secondary-color, 10%));  // Gradient background
+  background: linear-gradient(135deg, $secondary-color, darken($secondary-color, 10%));
   color: $text-color;
   font-size: 1rem;
   font-weight: bold;
@@ -25,14 +25,14 @@
   }
 
   &:hover {
-    background: linear-gradient(135deg, lighten($secondary-color, 10%), $secondary-color);  // Lighter gradient on hover
+    background: linear-gradient(135deg, lighten($secondary-color, 10%), $secondary-color);
     color: $highlight-color;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
   }
 
   &:active {
-    background: linear-gradient(135deg, darken($secondary-color, 10%), $secondary-color);  // Darker gradient on active
+    background: linear-gradient(135deg, darken($secondary-color, 10%), $secondary-color);
     box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.4);
     transform: translateY(0);
   }

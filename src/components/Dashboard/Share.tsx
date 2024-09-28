@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter, faDiscord, faReddit } from "@fortawesome/free-brands-svg-icons";
-import styles from "@/styles/Share.module.scss";
+import styles from "@/styles/SubContainer.module.scss";
 import { formatCurrency } from "@/utils/formatCurrency";
 import useSpentStore from "@/store/useSpentStore";
 import Loading from "@/components/Loading";

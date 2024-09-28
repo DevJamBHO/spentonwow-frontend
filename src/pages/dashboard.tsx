@@ -12,7 +12,8 @@ import { translate } from "@/utils/translate";
 import Details from "@/components/Dashboard/Details";
 import FakeDetails from "@/components/Dashboard/FakeDetails"; // Assurez-vous de l'ajouter correctement
 import AdBlockDetector from '@/components/AdBlockDetector';
-import Share from "@/components/Dashboard/Share"; // Assurez-vous de l'ajouter correctement
+import Share from "@/components/Dashboard/Share";
+import Wowchievement from "@/components/Dashboard/Wowchievement"; // Assurez-vous de l'ajouter correctement
 
 const Dashboard: React.FC = () => {
     const [isClient, setIsClient] = useState<boolean>(false);
@@ -62,6 +63,9 @@ const Dashboard: React.FC = () => {
                     </Container>
                     <Container className={styles.sideContainer}>
                         <Share />
+                    </Container>
+                    <Container className={styles.sideContainer}>
+                        <Wowchievement />
                     </Container>
                 </div>
             </div>
