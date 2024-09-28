@@ -75,5 +75,9 @@
     "title": "Wowchievement",
     "question1": "Want to track all your reputation and weekly quests? Visit",
     "question2": "to stay on top of everything!"
+  },
+  "meta": {
+    "description": "Easily calculate and track your spending in World of Warcraft, including subscriptions, microtransactions, and in-game purchases. Discover how much you have actually invested in WoW.",
+    "descriptionDashboard": "Want to know how much I've spent on WoW? The answer is here!"
   }
 }

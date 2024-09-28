@@ -1,5 +1,7 @@
+// pages/dashboard.tsx
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Layout from '@/layouts/Layout';
 import Container from '@/components/Container';
 import { detectLanguage, setLanguage } from '@/utils/language';
@@ -10,10 +12,10 @@ import CardList from '@/components/Dashboard/CardList';
 import styles from '@/styles/Dashboard.module.scss';
 import { translate } from "@/utils/translate";
 import Details from "@/components/Dashboard/Details";
-import FakeDetails from "@/components/Dashboard/FakeDetails"; // Assurez-vous de l'ajouter correctement
+import FakeDetails from "@/components/Dashboard/FakeDetails";
 import AdBlockDetector from '@/components/AdBlockDetector';
 import Share from "@/components/Dashboard/Share";
-import Wowchievement from "@/components/Dashboard/Wowchievement"; // Assurez-vous de l'ajouter correctement
+import Wowchievement from "@/components/Dashboard/Wowchievement";
 
 const Dashboard: React.FC = () => {
     const [isClient, setIsClient] = useState<boolean>(false);
@@ -41,6 +43,10 @@ const Dashboard: React.FC = () => {
 
     return (
         <Layout big>
+            <Head>
+                <meta name="description" content={translate('meta.description')} />
+                <meta property="og:description" content={translate('meta.descriptionDashboard')} />
+            </Head>
             <AdBlockDetector onDetect={setAdBlockDetected} />
             <div className={styles.amountDetails}>
                 <div className={styles.mainContainer}>

@@ -11,6 +11,7 @@ import { GetServerSideProps } from "next";
 import { getCapabilities } from "@/api/capabilities";
 import { translate } from '@/utils/translate';
 import { apiFetch } from '@/utils/apiService';
+import Head from "next/head";
 
 interface LoginProps {
   capabilities: any;
@@ -57,6 +58,10 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
 
   return (
       <Layout>
+        <Head>
+          <meta name="description" content={translate('meta.description')} />
+          <meta property="og:description" content={translate('meta.description')} />
+        </Head>
         <Container
             header={<div>{translate('siteName')}</div>}
             footer={
