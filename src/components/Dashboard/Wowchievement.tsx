@@ -11,6 +11,7 @@ const Share: React.FC = () => {
     return (
         <div className={styles.shareComponent}>
             <h1 className={styles.shareTitle}>
+                <img alt="Wowchievement logo" src="/images/wowchievement.webp" width="35" height="35" />
                 {translate('wowchievement.title')}
             </h1>
             <p className={styles.shareDescription}>
