@@ -13,6 +13,10 @@ RUN npm install -g lefthook
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
+# Set environment variable to skip lefthook in Docker
+ENV NODE_ENV=production
+ENV IN_DOCKER=true
+
 # Install all dependencies (including devDependencies)
 RUN npm install
 
@@ -22,7 +26,7 @@ COPY . .
 # Build the Next.js app
 RUN npm run build
 
-# Remove devDependencies after build to reduce image size
+# Remove devDependencies after build
 RUN npm prune --production
 
 # Expose port 3000
