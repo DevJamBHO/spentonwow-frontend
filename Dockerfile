@@ -10,19 +10,19 @@ WORKDIR /app
 # Install lefthook globally
 RUN npm install -g lefthook
 
-# Copy the package.json and package-lock.json files
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Disable lefthook during npm install
-ENV LEFTHOOK=0
+# Set NODE_ENV to production to skip lefthook
+ENV NODE_ENV=production
 
-# Install any needed packages
+# Install dependencies in production mode
 RUN npm install --production
 
 # Copy the rest of the application code
 COPY . .
 
-# Expose port 3000 to the outside world
+# Expose port 3000
 EXPOSE 3000
 
 # Run the app
