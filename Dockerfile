@@ -19,6 +19,8 @@ ENV NODE_ENV=production
 # Install dependencies in production mode
 RUN npm install --production
 
+RUN next build
+
 # Copy the rest of the application code
 COPY . .
 
