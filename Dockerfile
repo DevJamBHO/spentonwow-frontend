@@ -1,6 +1,9 @@
 # Use Node.js version 18.18.0 (or an appropriate version)
 FROM node:18.18.0-alpine
 
+# Install git and any other dependencies required for lefthook
+RUN apk add --no-cache git
+
 # Set the working directory in the container
 WORKDIR /app
 
