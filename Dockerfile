@@ -13,17 +13,17 @@ RUN npm install -g lefthook
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Set NODE_ENV to production
-ENV NODE_ENV=production
-
-# Install production dependencies
-RUN npm install --production
+# Install all dependencies (including devDependencies)
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
 # Build the Next.js app
 RUN npm run build
+
+# Remove devDependencies after build to reduce image size
+RUN npm prune --production
 
 # Expose port 3000
 EXPOSE 3000
