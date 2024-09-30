@@ -4,13 +4,16 @@ FROM node:18-alpine AS builder
 # Set working directory
 WORKDIR /app
 
-# Install dependencies (First copy only package files)
+# Set environment variable to skip lefthook installation in Docker
+ENV IN_DOCKER=true
+
+# Install dependencies
 COPY package*.json ./
 
 # Install all dependencies (including dev dependencies)
 RUN npm install
 
-# Now copy the rest of the app's code to the container (this includes src, pages, etc.)
+# Copy the rest of the app's code to the container (this includes src, pages, etc.)
 COPY . .
 
 # Build the application for production
@@ -22,7 +25,11 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Install production dependencies (Copy package files again)
+# Set environment variable for production mode
+ENV NODE_ENV=production
+ENV IN_DOCKER=true
+
+# Install only production dependencies
 COPY package*.json ./
 RUN npm install --only=production
 
