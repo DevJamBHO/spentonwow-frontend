@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
         if (region && server && character) {
             setLoading(true);
             fetchSpentData(region, server, character)
-                .then(() => setLoading(false));
+                //.then(() => setLoading(false));
         }
     }, [region, server, character]);
 
