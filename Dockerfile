@@ -1,36 +1,49 @@
-# Use Node.js version 18.18.0 (or an appropriate version)
-FROM node:18.18.0-alpine
+# Step 1: Build the application
+FROM node:18-alpine AS builder
 
-# Install git (if needed for lefthook)
-RUN apk add --no-cache git
-
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Install lefthook globally (if required)
-RUN npm install -g lefthook
+# Set environment variable to skip lefthook installation in Docker
+ENV IN_DOCKER=true
 
-# Copy package.json and package-lock.json
+# Install dependencies
 COPY package*.json ./
 
-# Set environment variable to skip lefthook in Docker
+# Install all dependencies (including dev dependencies)
+RUN npm install
+
+# Copy the rest of the app's code to the container (this includes src, pages, etc.)
+COPY . .
+
+# Build the application for production
+RUN npm run build
+
+# Step 2: Production image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Set environment variable for production mode
 ENV NODE_ENV=production
 ENV IN_DOCKER=true
 
-# Install all dependencies (including devDependencies)
-RUN npm install
+# Install only production dependencies
+COPY package*.json ./
+RUN npm install --only=production
 
-# Copy the rest of the application code
-COPY . .
+# Copy the production build files from the builder stage
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Build the Next.js app
-RUN npm run build
+# Set NODE_ENV to production
+ENV NODE_ENV production
 
-# Remove devDependencies after build
-RUN npm prune --production
-
-# Expose port 3000
+# Expose the port that Next.js uses
 EXPOSE 3000
 
-# Start the Next.js production server
-CMD ["npm", "start"]
+# Start the Next.js server in production mode
+CMD ["npm", "run", "start"]
