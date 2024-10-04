@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useSpentStore from "@/store/useSpentStore";
 import { formatCurrency } from "@/utils/formatCurrency";
 import styles from '@/styles/Details.module.scss';
-import {translate} from "@/utils/translate";
+import { translate } from "@/utils/translate";
 
 const Details: React.FC = () => {
     const extensionList = useSpentStore(state => state.extensions);
@@ -14,6 +14,12 @@ const Details: React.FC = () => {
 
     function getValueInCurrency(values: { dol: number, eur: number }) {
         return currency === 'USD' ? values.dol : values.eur;
+    }
+
+    function convertMonthsToYearsMonths(months: number) {
+        const years = Math.floor(months / 12);
+        const remainingMonths = months % 12;
+        return `${years > 0 ? translate('year', { count: years, count_singular: 'an', count_plural: 'ans' }) : ''} ${remainingMonths > 0 ? translate('month', { count: remainingMonths, count_singular: 'mois', count_plural: 'mois' }) : ''}`.trim();
     }
 
     const renderItems = (items: Array<spentDetail>) => {
@@ -67,7 +73,7 @@ const Details: React.FC = () => {
                 <p>{translate('subscription')} :</p>
                 <div className={styles.subscription}>
                     <div className={styles['subscription-item']}>
-                        <div>{subscription.estimated_months} {translate('months')}</div>
+                        <div>{convertMonthsToYearsMonths(subscription.estimated_months)}</div>
                         <div>{formatCurrency(getValueInCurrency(subscription.estimated_cost), { currency })}</div>
                     </div>
                 </div>

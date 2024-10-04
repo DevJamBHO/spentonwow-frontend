@@ -29,12 +29,6 @@ const Share: React.FC = () => {
         `${translate('share.twitter1')} ${formatCurrency(amountToUse, { currency })} ${translate('share.twitter2')} 💰⚔️ #SpentOnWow #RaidBrag #WoW`
     );
 
-    if (amountToUse === 0) {
-        return (
-            <Loading />
-        );
-    }
-
     return (
         <div className={styles.shareComponent}>
             <h1 className={styles.shareTitle}>

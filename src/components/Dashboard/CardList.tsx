@@ -41,12 +41,6 @@ const CardList: React.FC = () => {
         }
     }, [amountToUse]);
 
-    if (amountToUse === 0) {
-        return (
-            <Loading />
-        );
-    }
-
     return (
         <div className={styles.cardList}>
             <BurgerCard

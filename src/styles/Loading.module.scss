@@ -1,0 +1,11 @@
+.calcContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Assurez-vous que le conteneur prend toute la hauteur de la page
+}
+
+.calc {
+  width: 100px;   // Ajustez ces valeurs selon vos besoins
+  height: 100px;
+}

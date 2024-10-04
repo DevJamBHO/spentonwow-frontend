@@ -38,6 +38,8 @@
   color: $text-color;
   cursor: pointer;
   transition: color 0.3s;
+  height: 35px;
+  width: 35px;
 
   &:hover {
     color: $highlight-color;

@@ -37,12 +37,6 @@ const AmountSection: React.FC = () => {
         }
     }, [amountToUse]);
 
-    if (amountToUse === 0) {
-        return (
-            <Loading />
-        );
-    }
-
     return (
         <div className={styles.amountSection}>
             <div className={styles.amountTitle}>
