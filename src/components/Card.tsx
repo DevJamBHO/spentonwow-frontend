@@ -1,4 +1,3 @@
-// file: Card.tsx
 import React, { useState } from 'react';
 import styles from '@/styles/Card.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -4,7 +4,6 @@ import useSpentStore from "@/store/useSpentStore";
 import BurgerCard from "@/components/Dashboard/BurgerCard";
 import FilmCard from "@/components/Dashboard/FilmCard";
 import GoldCard from "@/components/Dashboard/GoldCard";
-import Loading from "@/components/Loading";
 
 const CardList: React.FC = () => {
     useSpentStore(state => state.fetchSpentData);
@@ -14,7 +13,6 @@ const CardList: React.FC = () => {
     const [localAmountEur, setLocalAmountEur] = useState<number>(0);
     const [localAmountUsd, setLocalAmountUsd] = useState<number>(0);
 
-    // Hook for updating local amounts
     useEffect(() => {
         const updateAmounts = () => {
             const currentAmountEur = useSpentStore.getState().amountEur;

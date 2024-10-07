@@ -1,6 +1,5 @@
 import { useEffect, FC } from 'react';
 
-// Déclaration pour étendre le type Window
 declare global {
     interface Window {
         adsbygoogle?: {
@@ -39,7 +38,6 @@ const AdBlockDetector: FC<AdBlockDetectorProps> = ({ onDetect }) => {
         };
 
         const checkNetworkElements = () => {
-            // Vérification du chargement d'un script publicitaire
             const testScript = document.createElement('script');
             testScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
             document.body.appendChild(testScript);
@@ -62,13 +60,11 @@ const AdBlockDetector: FC<AdBlockDetectorProps> = ({ onDetect }) => {
         };
 
         const checkAdBlockerModifications = (testScript: HTMLScriptElement) => {
-            // Vérification des modifications faites par les bloqueurs de publicité
             const detected = (window.adsbygoogle && window.adsbygoogle.loaded && !window.adsbygoogle.push.length) ?? true;
             document.body.removeChild(testScript);
             onDetect(detected);
         };
 
-        // Détection initiale
         const detectAdBlock = () => {
             checkDOMElements();
         };

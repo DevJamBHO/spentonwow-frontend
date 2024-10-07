@@ -4,7 +4,6 @@ import { faXTwitter, faDiscord, faReddit } from "@fortawesome/free-brands-svg-ic
 import styles from "@/styles/SubContainer.module.scss";
 import { formatCurrency } from "@/utils/formatCurrency";
 import useSpentStore from "@/store/useSpentStore";
-import Loading from "@/components/Loading";
 import {translate} from "@/utils/translate";
 
 const Share: React.FC = () => {

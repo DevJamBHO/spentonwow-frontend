@@ -1,4 +1,3 @@
-// pages/dashboard.tsx
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -16,12 +15,12 @@ import FakeDetails from "@/components/Dashboard/FakeDetails";
 import AdBlockDetector from '@/components/AdBlockDetector';
 import Share from "@/components/Dashboard/Share";
 import Wowchievement from "@/components/Dashboard/Wowchievement";
-import Loading from '@/components/Loading';  // Importer le nouveau composant
+import Loading from '@/components/Loading';
 
 const Dashboard: React.FC = () => {
     const [isClient, setIsClient] = useState<boolean>(false);
     const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true); // Nouvel état pour le chargement
+    const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
     const { region, server, character } = router.query;
 

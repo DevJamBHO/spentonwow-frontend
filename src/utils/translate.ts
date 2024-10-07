@@ -11,7 +11,6 @@ const translations: Record<string, GenericTranslations> = {
     fr,
 };
 
-// Fonction de traduction modifiée pour gérer le pluriel
 const translate = (key: string, props?: Record<string, string | number>): string => {
     const lang = getLanguage();
     const keys = key.split('.');

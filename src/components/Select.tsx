@@ -42,7 +42,6 @@ const Select: React.FC<SelectProps> = ({ id, value, onChange, label, options, cl
     };
 
     const handleInputBlur = () => {
-        // Add a small delay to allow the click event to register
         setTimeout(() => setIsOptionsVisible(false), 200);
     };
 

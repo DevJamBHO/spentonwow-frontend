@@ -16,7 +16,7 @@ export const formatCurrency = (
 ): string => {
     const {
         currency = 'USD',
-        locale = currencyLocaleMap[currency] || 'en-US', // Utiliser la locale par défaut si inconnue
+        locale = currencyLocaleMap[currency] || 'en-US',
         fractionDigits = 2,
         symbolDisplay = 'symbol',
     } = options;
