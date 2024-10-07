@@ -1,21 +1,23 @@
+// #file: dashboard.tsx
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/layouts/Layout';
 import Container from '@/components/Container';
 import { detectLanguage, setLanguage } from '@/utils/language';
-import useSpentStore from "@/store/useSpentStore";
+import useSpentStore from '@/store/useSpentStore';
 import Header from '@/components/Dashboard/Header';
 import AmountSection from '@/components/Dashboard/AmountSection';
 import CardList from '@/components/Dashboard/CardList';
 import styles from '@/styles/Dashboard.module.scss';
-import { translate } from "@/utils/translate";
-import Details from "@/components/Dashboard/Details";
-import FakeDetails from "@/components/Dashboard/FakeDetails";
+import { translate } from '@/utils/translate';
+import Details from '@/components/Dashboard/Details';
+import FakeDetails from '@/components/Dashboard/FakeDetails';
 import AdBlockDetector from '@/components/AdBlockDetector';
-import Share from "@/components/Dashboard/Share";
-import Wowchievement from "@/components/Dashboard/Wowchievement";
+import Share from '@/components/Dashboard/Share';
+import Wowchievement from '@/components/Dashboard/Wowchievement';
 import Loading from '@/components/Loading';
+import { trackPlausibleEvent } from '@/utils/plausible'; // Import de la fonction de suivi Plausible
 
 const Dashboard: React.FC = () => {
     const [isClient, setIsClient] = useState<boolean>(false);
@@ -40,12 +42,16 @@ const Dashboard: React.FC = () => {
         }
     }, [region, server, character]);
 
+    useEffect(() => {
+        trackPlausibleEvent('adBlock', { active: adBlockDetected });
+    }, [adBlockDetected]);
+
     if (!isClient) {
         return null;
     }
 
     if (loading) {
-        return  (
+        return (
             <Layout big>
                 <Loading />
             </Layout>
