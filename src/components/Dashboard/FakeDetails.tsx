@@ -35,7 +35,9 @@ const FakeDetails: React.FC = () => {
             <div className={styles.warning}>
                 <p>
                     {translate('removeAdblock')}
-                    &nbsp;<FontAwesomeIcon icon={faGhost} />
+                </p>
+                <p>
+                    <FontAwesomeIcon icon={faGhost} width="35" height="35" />
                 </p>
             </div>
         </div>
