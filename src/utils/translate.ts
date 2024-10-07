@@ -11,6 +11,15 @@ const translations: Record<string, GenericTranslations> = {
     fr,
 };
 
+
+function formatCountString(str :string, count :number) {
+    const usePlural = count > 1;
+    return str.replace(
+        /(\d+)\s*\{count_singular:([^,]+),count_plural:([^}]+)\}/,
+        (match, count, singular, plural) => `${count} ${usePlural ? plural : singular}`
+    );
+}
+
 const translate = (key: string, props?: Record<string, string | number>): string => {
     const lang = getLanguage();
     const keys = key.split('.');
@@ -25,7 +34,7 @@ const translate = (key: string, props?: Record<string, string | number>): string
     }
 
     if (props?.count) {
-        translation = props.count === 1 ? `${props.count} ${props.count_singular}` : `${props.count} ${props.count_plural}`
+        translation = formatCountString(translation.replace('{count}', props.count), props.count as number);
     }
 
     return translation;

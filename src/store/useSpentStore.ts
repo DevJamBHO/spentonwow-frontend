@@ -2,14 +2,31 @@ import { create } from 'zustand';
 import { apiFetch } from '@/utils/apiService';
 import useTokenStore from "@/store/useTokenStore";
 
+export interface Cost {
+    dol: number;
+    eur: number;
+}
+
+export interface SpentDetail {
+    name: string;
+    owned: boolean;
+    Versions?: { edition: string; owned: boolean; cost: Cost }[];
+    cost: Cost;
+}
+
+export interface SubscriptionDetail {
+    estimated_cost: Cost;
+    estimated_months: number;
+}
+
 interface SpentState {
     currency: "EUR" | "USD";
     amountEur: number;
     amountUsd: number;
     amountInCurrentCurrency: number;
-    extensions: Array<spentDetail>;
-    shop: {mount: Array<spentDetail>, pet: Array<spentDetail>};
-    subscription: subscriptionDetail;
+    extensions: SpentDetail[];
+    shop: { mounts: SpentDetail[]; pets: SpentDetail[] };
+    subscription: SubscriptionDetail;
     setCurrency: (value: "EUR" | "USD") => void;
     fetchSpentData: (region: string | string[], server: string | string[], character: string | string[]) => Promise<void>;
 }
@@ -17,11 +34,11 @@ interface SpentState {
 const useSpentStore = create<SpentState>((set, get) => ({
     currency: 'EUR',
     amountEur: 0,
-    amountUsd: 0 ,
+    amountUsd: 0,
     extensions: [],
-    shop: {mount: [], pet: []},
+    shop: { mounts: [], pets: [] },
     subscription: {
-        estimated_cost: {eur: 0, dol: 0},
+        estimated_cost: { eur: 0, dol: 0 },
         estimated_months: 0
     },
     setCurrency: (value) => set({ currency: value }),
@@ -38,7 +55,7 @@ const useSpentStore = create<SpentState>((set, get) => ({
             setTokenPrice(data.token.cost);
             state.shop = data.shop
             state.subscription = data.subscription
-            state.extensions = data.extensions
+            state.extensions = data.expansions
 
             set(state => ({
                 ...state,

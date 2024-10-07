@@ -19,6 +19,7 @@
   "subscription": "Subscription",
   "year": "{count} {count_singular:year,count_plural:years}",
   "month": "{count} {count_singular:month,count_plural:months}",
+  "owned": "{count} {count_singular:owned,count_plural:owned}",
   "extensions": "Extensions",
   "shop": "Shop",
   "hideItems": "Hide",

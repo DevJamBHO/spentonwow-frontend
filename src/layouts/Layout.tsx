@@ -1,8 +1,8 @@
-// components/Layout.tsx
+// #file: Layout.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Layout.module.scss';
-import {translate} from "@/utils/translate";
+import { translate } from "@/utils/translate";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -54,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
             </Head>
             <div className={`${styles.root} ${big ? styles.big : ''}`} style={{ backgroundImage: !videoSupported ? "url('/images/background.webp')" : 'none' }}>
                 {videoSupported && (
-                    <video ref={videoRef} className={styles.backgroundVideo} muted>
+                    <video ref={videoRef} className={styles.backgroundVideo} muted disablePictureInPicture>
                         <source src="/videos/background.webm" type="video/webm" />
                     </video>
                 )}
