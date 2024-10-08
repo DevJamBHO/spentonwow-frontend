@@ -1,6 +1,5 @@
 export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    console.log("Base URL:", baseUrl);
 
     const url = `${baseUrl}${endpoint}`;
 

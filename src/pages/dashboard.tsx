@@ -1,8 +1,4 @@
-// #file: pages/dashboard.tsx
-
 import React, { useState, useEffect } from 'react';
-import { GetServerSidePropsContext } from 'next'; // Importer le type
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/layouts/Layout';
 import Container from '@/components/Container';
@@ -19,7 +15,9 @@ import AdBlockDetector from '@/components/AdBlockDetector';
 import Share from '@/components/Dashboard/Share'; // Assurez-vous que le chemin est correct
 import Wowchievement from '@/components/Dashboard/Wowchievement';
 import Loading from '@/components/Loading';
-import { trackPlausibleEvent } from '@/utils/plausible'; // Import de la fonction de suivi Plausible
+import PieChart, { ExpenseData } from '@/components/Dashboard/PieChart';
+import { trackPlausibleEvent } from '@/utils/plausible';
+import {GetServerSidePropsContext} from "next"; // Import de la fonction de suivi Plausible
 
 interface DashboardProps {
     initialAmountEur: number;
@@ -96,6 +94,9 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                     </Container>
                     <Container className={styles.sideContainer}>
                         <Wowchievement region={region} server={server} character={character} />
+                    </Container>
+                    <Container className={styles.sideContainer}>
+                        <PieChart/>
                     </Container>
                 </div>
             </div>

@@ -1,0 +1,94 @@
+.pieChartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: auto;
+}
+
+.pieChart {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  max-height: 300px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.pieSliceContainer {
+  cursor: pointer;
+  position: relative;
+}
+
+.pieSlice {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.hovered {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: $primary-color;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px $shadow-color;
+}
+
+.legendColor {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.legendText {
+  color: $text-color;
+  font-size: 16px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.legendAmount {
+  color: $text-color;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.hoveredLegendItem .legendText {
+  text-decoration: underline;
+  text-decoration-color: $highlight-color;
+  text-underline-offset: 0.2em;
+}
+
+.pieSliceContainer {
+  cursor: pointer;
+  position: relative;
+}
+
+.pieSlice {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.hovered {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
