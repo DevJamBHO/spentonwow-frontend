@@ -6,6 +6,7 @@ import useSpentStore from "@/store/useSpentStore";
 
 const AmountSection: React.FC = () => {
     const currency = useSpentStore(state => state.currency);
+    const startYear = useSpentStore(state => state.startYear);
     useSpentStore(state => state.amountInCurrentCurrency);
 
     const [localAmountEur, setLocalAmountEur] = useState<number>(0);
@@ -38,7 +39,10 @@ const AmountSection: React.FC = () => {
     return (
         <div className={styles.amountSection}>
             <div className={styles.amountTitle}>
-                {translate('amountSpentSince')}&nbsp;<span className={styles.price}>{formatCurrency(amountToUse, { currency })}</span>
+                {translate('amountSpentSinceStart')}&nbsp;
+                {startYear}
+                {translate('amountSpentSinceEnd')}&nbsp;
+                <span className={styles.price}>{formatCurrency(amountToUse, { currency })}</span>
             </div>
         </div>
     );

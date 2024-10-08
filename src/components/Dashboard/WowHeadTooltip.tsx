@@ -1,4 +1,3 @@
-// #file: WowHeadTooltip.tsx
 import React from "react";
 
 interface WowHeadTooltipProps {

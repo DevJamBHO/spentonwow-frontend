@@ -31,6 +31,7 @@ interface SpentState {
     currency: "EUR" | "USD";
     amountEur: number;
     amountUsd: number;
+    startYear: number;
     amountInCurrentCurrency: number;
     extensions: SpentDetail[];
     shop: { mounts: SpentDetail[]; pets: SpentDetail[] };
@@ -45,6 +46,7 @@ const useSpentStore = create<SpentState>((set, get) => ({
     amountUsd: 0,
     extensions: [],
     shop: { mounts: [], pets: [] },
+    startYear: new Date().getFullYear(),
     subscription: {
         estimated_cost: { eur: 0, dol: 0 },
         estimated_months: 0,
@@ -65,6 +67,7 @@ const useSpentStore = create<SpentState>((set, get) => ({
             state.shop = data.shop
             state.subscription = data.subscription
             state.extensions = data.expansions
+            state.startYear = new Date(data.first_activity).getFullYear()
 
             set(state => ({
                 ...state,

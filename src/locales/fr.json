@@ -1,6 +1,7 @@
 {
   "siteName": "Wow Spent",
-  "amountSpentSince": "Depuis 2004, vous avez dépensé :",
+  "amountSpentSinceStart": "Depuis",
+  "amountSpentSinceEnd": ", vous avez dépensé :",
   "bigMacEquivalent": "Equivalent Big Macs",
   "bigMacPriceInfo": "Montant divisé par le prix du Big Mac",
   "goldCoinsEquivalent": "Pièces d'or",
