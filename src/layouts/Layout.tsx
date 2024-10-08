@@ -12,9 +12,14 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [videoSupported, setVideoSupported] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const video = videoRef.current;
+
+        if (window.innerWidth <= 600) {
+            setIsMobile(true);
+        }
 
         if (!video || typeof video.canPlayType !== 'function' || video.canPlayType('video/mp4') === "") {
             setVideoSupported(false);
@@ -32,6 +37,10 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
             video.removeEventListener('error', handleVideoError);
         };
     }, []);
+
+    const backgroundStyle = isMobile || !videoSupported
+        ? { backgroundImage: "url('/images/background.webp')" }
+        : { };
 
     return (
         <>
@@ -52,8 +61,8 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
                 <meta property="og:type" content="website" />
                 <meta property="og:locale" content="en_US" />
             </Head>
-            <div className={`${styles.root} ${big ? styles.big : ''}`} style={{ backgroundImage: !videoSupported ? "url('/images/background.webp')" : 'none' }}>
-                {videoSupported && (
+            <div className={`${styles.root} ${big ? styles.big : ''}`} style={backgroundStyle}>
+                {!isMobile && videoSupported && (
                     <video ref={videoRef} className={styles.backgroundVideo} muted disablePictureInPicture>
                         <source src="/videos/background.webm" type="video/webm" />
                     </video>

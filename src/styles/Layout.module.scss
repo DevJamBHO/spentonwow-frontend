@@ -67,4 +67,13 @@
     padding: 0.5rem;
     max-width: 100%;
   }
+
+  .backgroundVideo {
+    display: none; // Masquer la vidéo sur mobile
+  }
+
+  .root {
+    background-image: url('/public/images/background.webp'); // Utiliser l'image de fond sur mobile
+    background-attachment: fixed; // Fond fixe sur mobile
+  }
 }
