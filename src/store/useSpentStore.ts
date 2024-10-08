@@ -12,6 +12,7 @@ export interface SpentDetail {
     owned: boolean;
     Versions?: { edition: string; owned: boolean; cost: Cost }[];
     cost: Cost;
+    wow_head_link?: {id: number; path: string; type: string}
 }
 
 export interface SubscriptionDetail {

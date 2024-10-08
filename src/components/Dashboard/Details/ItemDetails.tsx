@@ -50,17 +50,41 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                 {item.owned && (
                     <div className={styles['shop-item']}>
                         <div className={styles['item-name']}>
-                            <div>{item.name}</div>
+                            {
+                                item.wow_head_link ? (
+                                    <a
+                                        href={`https://www.wowhead.com/${item.wow_head_link.type}=${item.wow_head_link.id}`}
+                                        target="_blank"
+                                        data-wowhead={`${item.wow_head_link.type}=${item.wow_head_link.id}`}
+                                    >{item.name}</a>
+                                ) : (
+                                    <div>{item.name}</div>
+                                )
+                            }
+
                         </div>
                         <div>
-                            {formatCurrency(getValueInCurrency(item.cost), { currency })}
+                            {formatCurrency(getValueInCurrency(item.cost), {currency})}
                         </div>
                     </div>
                 )}
                 {showNotOwned && !item.owned && (
                     <div className={styles['not-owned']}>
                         <div className={styles['item-name']}>
-                            <div>{item.name} ({translate('notOwned')})</div>
+
+                            {
+                                item.wow_head_link ? (
+                                    <div>
+                                        <a
+                                            href={`https://www.wowhead.com/${item.wow_head_link.type}=${item.wow_head_link.id}`}
+                                            target="_blank"
+                                            data-wowhead={`${item.wow_head_link.type}=${item.wow_head_link.id}`}
+                                        >{item.name}</a> ({translate('notOwned')})
+                                    </div>
+                                ) : (
+                                    <div>{item.name} ({translate('notOwned')})</div>
+                                )
+                            }
                         </div>
                         <div>
                             {formatCurrency(getValueInCurrency(item.cost), { currency })}
