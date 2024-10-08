@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '@/styles/PieChart.module.scss';
 import useSpentStore, { Cost, SpentDetail } from '@/store/useSpentStore';
+import {translate} from "@/utils/translate";
 
 // Fonction pour obtenir la valeur dans la devise sélectionnée
 const getValueInCurrency = (values: Cost, currency: "USD" | "EUR"): number => {
@@ -53,10 +54,10 @@ const PieChart: React.FC = () => {
     }, 0);
 
     const expenses: ExpenseData[] = [
-        { category: 'Subscription', amount: subscriptionCost },
-        { category: 'Extensions', amount: extensionsCost },
-        { category: 'Shop Mounts', amount: mountsCost },
-        { category: 'Shop Pets', amount: petsCost }
+        { category: 'subscription', amount: subscriptionCost },
+        { category: 'extensions', amount: extensionsCost },
+        { category: 'mounts', amount: mountsCost },
+        { category: 'pets', amount: petsCost }
     ];
 
     const colors = [
@@ -129,7 +130,7 @@ const PieChart: React.FC = () => {
                             className={styles.legendColor}
                             style={{ backgroundColor: colors[index % colors.length] }}
                         ></span>
-                        <span className={styles.legendText}>{expense.category}</span>
+                        <span className={styles.legendText}>{translate(expense.category)}</span>
                         <span className={styles.legendAmount}>{expense.amount} {currency === 'EUR' ? '€' : '$'}</span>
                     </div>
                 ))}

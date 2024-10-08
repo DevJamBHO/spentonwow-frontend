@@ -23,6 +23,8 @@
   "owned": "{count} {count_singular:owned,count_plural:owned}",
   "extensions": "Extensions",
   "shop": "Shop",
+  "mounts": "Mounts",
+  "pets": "Pets",
   "hideItems": "Hide",
   "showItems": "item(s) not owned",
   "notOwned": "not owned",
