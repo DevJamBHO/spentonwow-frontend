@@ -1,8 +1,8 @@
-// components/SubscriptionDetails.tsx
 import React, { useState } from 'react';
 import { formatCurrency } from '@/utils/formatCurrency';
 import styles from '@/styles/Details.module.scss';
 import { translate } from '@/utils/translate';
+import { getLanguage } from "@/utils/language";
 
 interface SubscriptionPeriod {
     start_date: string;
@@ -32,7 +32,8 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({ subscription,
     const formatDate = (dateString: string): string => {
         const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
         const date = new Date(dateString);
-        return date.toLocaleDateString('fr-FR', options);
+        const lang = getLanguage()
+        return date.toLocaleDateString(`${lang}-${lang.toUpperCase()}`, options);
     };
 
     const handleToggleDetails = () => setShowDetails(!showDetails);

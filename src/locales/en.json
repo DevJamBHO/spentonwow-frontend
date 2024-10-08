@@ -27,6 +27,8 @@
   "showItems": "item(s) not owned",
   "notOwned": "not owned",
   "removeAdblock": "The details are in stealth mode! Disable your ad blocker to make them appear.",
+  "showDetails": "Show details",
+  "hideDetails": "Hide details",
   "films": {
     "avengersEndgame": "Avengers: Endgame",
     "avatar": "Avatar",

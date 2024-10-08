@@ -25,11 +25,18 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+    margin-left: $space-small;
+    margin-right: $space-small;
   }
 
   .period-date {
     font-style: italic;
-    color: #666;
+    color: $text-color;
+    .wowhead-link {
+      display: flex;
+      flex-direction: row;
+      gap: calc($space-small / 2);
+    }
   }
 
 
@@ -42,6 +49,7 @@
       padding: $space-small $space-medium;
       background-color: $primary-color;
       border-radius: $border-radius;
+      margin-top: $space-small;
       margin-bottom: $space-small;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       align-items: center;

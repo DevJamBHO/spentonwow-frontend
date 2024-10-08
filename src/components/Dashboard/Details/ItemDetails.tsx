@@ -32,11 +32,11 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                 {showNotOwned && allNotOwnedVersions.length > 0 && (
                     <div>
                         {allNotOwnedVersions.map((version, index) => (
-                            <div className={styles['not-owned']} key={`${item.name}-${version.edition}-${index}`}>
-                                <div className={styles['item-name']}>
+                            <div className={styles['subscription-period']} key={`${item.name}-${version.edition}-${index}`}>
+                                <div className={styles['period-date']}>
                                     <div>{`${item.name} - ${version.edition}`} ({translate('notOwned')})</div>
                                 </div>
-                                <div>
+                                <div className={styles['period-length']}>
                                     {formatCurrency(getValueInCurrency(version.cost), { currency })}
                                 </div>
                             </div>
@@ -71,12 +71,11 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                     </div>
                 )}
                 {showNotOwned && !item.owned && (
-                    <div className={styles['not-owned']}>
-                        <div className={styles['item-name']}>
-
+                    <div className={styles['subscription-period']}>
+                        <div className={styles['period-date']}>
                             {
                                 item.wow_head_link ? (
-                                    <div>
+                                    <div className={styles['wowhead-link']}>
                                         <WowHeadTooltip
                                             id={item.wow_head_link.id}
                                             type={item.wow_head_link.type}
@@ -89,7 +88,7 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                                 )
                             }
                         </div>
-                        <div>
+                        <div className={styles['period-length']}>
                             {formatCurrency(getValueInCurrency(item.cost), { currency })}
                         </div>
                     </div>
