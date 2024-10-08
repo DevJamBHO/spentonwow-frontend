@@ -17,7 +17,10 @@ const Header: React.FC = () => {
 
     return (
         <div className={styles.headerContainer}>
-            <h1 className={styles.siteName}>{translate('siteName')}</h1>
+            <a className={styles.siteName} href="/">
+                <img alt="Wowspent logo" src="/images/logo.webp" width="35" height="35"/>
+                {translate('siteName')}
+            </a>
             <Select
                 id="currency-select"
                 value={currency}
