@@ -3,6 +3,7 @@ import { formatCurrency } from '@/utils/formatCurrency';
 import styles from '@/styles/Details.module.scss';
 import { translate } from '@/utils/translate';
 import { Cost, SpentDetail } from '@/store/useSpentStore';
+import WowHeadTooltip from "@/components/Dashboard/WowHeadTooltip";
 
 interface ItemDetailsProps {
     item: SpentDetail;
@@ -52,11 +53,12 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                         <div className={styles['item-name']}>
                             {
                                 item.wow_head_link ? (
-                                    <a
-                                        href={`https://www.wowhead.com/${item.wow_head_link.type}=${item.wow_head_link.id}`}
-                                        target="_blank"
-                                        data-wowhead={`${item.wow_head_link.type}=${item.wow_head_link.id}`}
-                                    >{item.name}</a>
+                                    <WowHeadTooltip
+                                        id={item.wow_head_link.id}
+                                        type={item.wow_head_link.type}
+                                        icon={item.wow_head_link.icon}
+                                        name={item.name}
+                                    />
                                 ) : (
                                     <div>{item.name}</div>
                                 )
@@ -75,11 +77,12 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                             {
                                 item.wow_head_link ? (
                                     <div>
-                                        <a
-                                            href={`https://www.wowhead.com/${item.wow_head_link.type}=${item.wow_head_link.id}`}
-                                            target="_blank"
-                                            data-wowhead={`${item.wow_head_link.type}=${item.wow_head_link.id}`}
-                                        >{item.name}</a> ({translate('notOwned')})
+                                        <WowHeadTooltip
+                                            id={item.wow_head_link.id}
+                                            type={item.wow_head_link.type}
+                                            icon={item.wow_head_link.icon}
+                                            name={item.name}
+                                        /> ({translate('notOwned')})
                                     </div>
                                 ) : (
                                     <div>{item.name} ({translate('notOwned')})</div>
