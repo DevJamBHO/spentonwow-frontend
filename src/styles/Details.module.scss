@@ -17,6 +17,21 @@
       text-align: left;
     }
   }
+  .subscription-periods {
+    margin-top: 10px;
+  }
+
+  .subscription-period {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .period-date {
+    font-style: italic;
+    color: #666;
+  }
+
 
   .subscription,
   .extensions,

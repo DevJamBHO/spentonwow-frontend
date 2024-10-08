@@ -17,6 +17,13 @@ export interface SpentDetail {
 export interface SubscriptionDetail {
     estimated_cost: Cost;
     estimated_months: number;
+    periods: SubscriptionPeriod[];
+}
+
+export interface SubscriptionPeriod {
+    start_date: string;
+    end_date: string;
+    months: number;
 }
 
 interface SpentState {
@@ -39,7 +46,8 @@ const useSpentStore = create<SpentState>((set, get) => ({
     shop: { mounts: [], pets: [] },
     subscription: {
         estimated_cost: { eur: 0, dol: 0 },
-        estimated_months: 0
+        estimated_months: 0,
+        periods: []
     },
     setCurrency: (value) => set({ currency: value }),
     fetchSpentData: async (region, server, character) => {
