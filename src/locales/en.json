@@ -29,6 +29,7 @@
   "showItems": "item(s) not owned",
   "notOwned": "not owned",
   "removeAdblock": "The details are in stealth mode! Disable your ad blocker to make them appear.",
+  "removeAdblockPie": "These details are guarded by a magical shield! Disable your ad blocker to break the barrier and reveal them.",
   "showDetails": "Show details",
   "hideDetails": "Hide details",
   "films": {

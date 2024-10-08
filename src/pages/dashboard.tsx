@@ -17,7 +17,8 @@ import Wowchievement from '@/components/Dashboard/Wowchievement';
 import Loading from '@/components/Loading';
 import PieChart, { ExpenseData } from '@/components/Dashboard/PieChart';
 import { trackPlausibleEvent } from '@/utils/plausible';
-import {GetServerSidePropsContext} from "next"; // Import de la fonction de suivi Plausible
+import {GetServerSidePropsContext} from "next";
+import FakePieChart from "@/components/Dashboard/FakePieChart"; // Import de la fonction de suivi Plausible
 
 interface DashboardProps {
     initialAmountEur: number;
@@ -96,7 +97,11 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         <Wowchievement region={region} server={server} character={character} />
                     </Container>
                     <Container className={styles.sideContainer}>
-                        <PieChart/>
+                        {adBlockDetected ? (
+                            <FakePieChart />
+                        ) : (
+                            <PieChart />
+                        )}
                     </Container>
                 </div>
             </div>

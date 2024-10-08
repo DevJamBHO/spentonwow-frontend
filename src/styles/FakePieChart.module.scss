@@ -1,0 +1,50 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.fakeContent {
+  text-align: center;
+  color: #888;
+  filter: blur(5px);
+  border-radius: 10px;
+}
+
+.fakePie {
+  width: 150px;
+  height: 150px;
+  background: conic-gradient($primary-color 25%, $secondary-color 0 50%, $primary-color 0 75%, $secondary-color 0);
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.fakeText {
+  height: 20px;
+  background-color: $primary-color;
+  border-radius: 3px;
+  margin: 10px 0;
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 16px;
+  color: $text-color;
+  border-radius: 10px;
+
+  p {
+    margin: 5px 0;
+  }
+
+  svg {
+    color: $text-color;
+    margin-bottom: 5px;
+  }
+}
