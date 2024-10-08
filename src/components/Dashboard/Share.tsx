@@ -1,28 +1,31 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter, faDiscord, faReddit } from "@fortawesome/free-brands-svg-icons";
 import styles from "@/styles/SubContainer.module.scss";
 import { formatCurrency } from "@/utils/formatCurrency";
 import useSpentStore from "@/store/useSpentStore";
-import {translate} from "@/utils/translate";
+import { translate } from "@/utils/translate";
 
-const Share: React.FC = () => {
+interface ShareProps {
+    initialAmountEur: number;
+    initialAmountUsd: number;
+}
+
+const Share: React.FC<ShareProps> = ({ initialAmountEur, initialAmountUsd }) => {
     const currency = useSpentStore(state => state.currency);
 
-    const [localAmountEur, setLocalAmountEur] = useState<number>(0);
-    const [localAmountUsd, setLocalAmountUsd] = useState<number>(0);
+    const [localAmountEur, setLocalAmountEur] = useState<number>(initialAmountEur);
+    const [localAmountUsd, setLocalAmountUsd] = useState<number>(initialAmountUsd);
     const amountToUse = currency === 'USD' ? localAmountUsd : localAmountEur;
 
     useEffect(() => {
-        if (amountToUse === 0) {
-            const intervalId = setInterval(() => {
-                setLocalAmountEur(useSpentStore.getState().amountEur);
-                setLocalAmountUsd(useSpentStore.getState().amountUsd);
-            }, 100);
+        const intervalId = setInterval(() => {
+            setLocalAmountEur(useSpentStore.getState().amountEur || initialAmountEur);
+            setLocalAmountUsd(useSpentStore.getState().amountUsd || initialAmountUsd);
+        }, 100);
 
-            return () => clearInterval(intervalId);
-        }
-    }, [amountToUse]);
+        return () => clearInterval(intervalId);
+    }, [amountToUse, initialAmountEur, initialAmountUsd]);
 
     const tweetMessage = encodeURIComponent(
         `${translate('share.twitter1')} ${formatCurrency(amountToUse, { currency })} ${translate('share.twitter2')} 💰⚔️ #SpentOnWow #RaidBrag #WoW`

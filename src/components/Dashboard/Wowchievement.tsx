@@ -1,12 +1,17 @@
-import React from "react";import styles from "@/styles/SubContainer.module.scss";
+// #file: components/Wowchievement.tsx
+import React from "react";
+import styles from "@/styles/SubContainer.module.scss";
 import {translate} from "@/utils/translate";
 import { getLanguage } from "@/utils/language";
 
+interface WowchievementProps {
+    region: string;
+    server: string;
+    character: string;
+}
 
-const Share: React.FC = () => {
-
-    const queryParameters = new URLSearchParams(window.location.search)
-    const href = `https://wowchievement.com/${getLanguage()}/renown?region=${queryParameters.get('region')}&server%5B0%5D=${queryParameters.get('server')}&character%5B0%5D=${queryParameters.get('character')}`
+const Wowchievement: React.FC<WowchievementProps> = ({ region, server, character }) => {
+    const href = `https://wowchievement.com/${getLanguage()}/renown?region=${region}&server%5B0%5D=${server}&character%5B0%5D=${character}`;
 
     return (
         <div className={styles.shareComponent}>
@@ -23,4 +28,4 @@ const Share: React.FC = () => {
     );
 };
 
-export default Share;
+export default Wowchievement;

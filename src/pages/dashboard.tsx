@@ -1,5 +1,7 @@
-// #file: dashboard.tsx
+// #file: pages/dashboard.tsx
+
 import React, { useState, useEffect } from 'react';
+import { GetServerSidePropsContext } from 'next'; // Importer le type
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/layouts/Layout';
@@ -14,18 +16,23 @@ import { translate } from '@/utils/translate';
 import Details from '@/components/Dashboard/Details';
 import FakeDetails from '@/components/Dashboard/FakeDetails';
 import AdBlockDetector from '@/components/AdBlockDetector';
-import Share from '@/components/Dashboard/Share';
+import Share from '@/components/Dashboard/Share'; // Assurez-vous que le chemin est correct
 import Wowchievement from '@/components/Dashboard/Wowchievement';
 import Loading from '@/components/Loading';
 import { trackPlausibleEvent } from '@/utils/plausible'; // Import de la fonction de suivi Plausible
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+    initialAmountEur: number;
+    initialAmountUsd: number;
+    region: string;
+    server: string;
+    character: string;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUsd, region, server, character }) => {
     const [isClient, setIsClient] = useState<boolean>(false);
     const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
-    const router = useRouter();
-    const { region, server, character } = router.query;
-
     const fetchSpentData = useSpentStore(state => state.fetchSpentData);
 
     useEffect(() => {
@@ -85,15 +92,31 @@ const Dashboard: React.FC = () => {
                         {translate('publicity')}
                     </Container>
                     <Container className={styles.sideContainer}>
-                        <Share />
+                        <Share initialAmountEur={initialAmountEur} initialAmountUsd={initialAmountUsd} />
                     </Container>
                     <Container className={styles.sideContainer}>
-                        <Wowchievement />
+                        <Wowchievement region={region} server={server} character={character} />
                     </Container>
                 </div>
             </div>
         </Layout>
     );
 };
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const { region, server, character } = context.query;
+    const initialAmountEur = 0;
+    const initialAmountUsd = 0;
+
+    return {
+        props: {
+            initialAmountEur,
+            initialAmountUsd,
+            region: region as string || "",
+            server: server as string || "",
+            character: character as string || ""
+        },
+    };
+}
 
 export default Dashboard;
