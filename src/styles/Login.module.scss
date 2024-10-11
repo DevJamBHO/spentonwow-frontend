@@ -3,14 +3,44 @@
   color: $highlight-color;
   font-weight: 700;
 }
-
-.intro {
-  margin: 1rem 0;
-  font-size: 0.9rem;
-  color: lighten($text-color, 20%);
-  text-align: justify;
+@keyframes sparkle {
+  0%, 100% {
+    color: darken($text-color, 15%);
+    text-shadow: none;
+  }
+  50% {
+    color: lighten($text-color, 10%);
+    text-shadow: 0 0 8px lighten($text-color, 30%);
+  }
 }
 
+.intro {
+  margin-bottom: $space-medium;
+  font-size: 1rem;
+  color: $text-color, 15%;
+  text-align: justify;
+
+  p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+
+    &:first-child {
+      animation: sparkle 3s infinite;
+    }
+  }
+
+  /* Styles pour les écrans de petite taille */
+  @media (max-width: 600px) {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+
+    p {
+      margin: 0.4rem 0;
+      line-height: 1.4;
+      animation: none; // Désactiver l'animation sur mobile pour éviter les distractions
+    }
+  }
+}
 .form {
   display: flex;
   flex-direction: column;
