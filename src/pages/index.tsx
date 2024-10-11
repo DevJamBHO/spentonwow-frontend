@@ -79,8 +79,8 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
             }
         >
           <section className={styles.intro}>
-            <p>{translate('introText1')}</p>
-            <p>{translate('introText2')}</p>
+            <p>{translate('introText1')}</p><br/>
+            <p>{translate('introText2')}</p><br/>
             <p>{translate('introText3')}</p>
           </section>
           <form onSubmit={handleSubmit} className={styles.form}>
