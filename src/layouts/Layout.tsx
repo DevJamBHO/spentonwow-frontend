@@ -1,9 +1,6 @@
-// #file: Layout.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Layout.module.scss';
-import { translate } from "@/utils/translate";
-
 interface LayoutProps {
     children: React.ReactNode;
     big?: boolean;
@@ -63,10 +60,15 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
             </Head>
             <div className={`${styles.root} ${big ? styles.big : ''}`} style={backgroundStyle}>
                 {!isMobile && videoSupported && (
-                    <video ref={videoRef} className={styles.backgroundVideo} muted disablePictureInPicture>
+                    <video ref={videoRef} className={styles.backgroundVideo} muted disablePictureInPicture aria-hidden="true">
                         <source src="/videos/background.webm" type="video/webm" />
                     </video>
                 )}
+                <noscript>
+                    <div className={styles.backgroundImageFallback}>
+                        <img src="/images/background.webp" alt="Background" aria-hidden="true" />
+                    </div>
+                </noscript>
                 <div className={styles.content}>
                     {children}
                 </div>
