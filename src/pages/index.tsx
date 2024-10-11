@@ -11,6 +11,8 @@ import { GetServerSideProps } from "next";
 import { getCapabilities } from "@/api/capabilities";
 import { translate } from '@/utils/translate';
 import Head from "next/head";
+import AdBlockDetector from "@/components/AdBlockDetector";
+import {trackPlausibleEvent} from "@/utils/plausible";
 
 interface LoginProps {
   capabilities: any;
@@ -30,6 +32,7 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
   const [server, setServer] = useState<string>('');
   const [character, setCharacter] = useState<string>('');
   const [isClient, setIsClient] = useState<boolean>(false);
+  const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -40,6 +43,10 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    trackPlausibleEvent('adBlock', { active: adBlockDetected });
+  }, [adBlockDetected]);
 
   const handleRegionSelect = (selectedRegion: string) => {
     setRegion(selectedRegion);
@@ -61,6 +68,7 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
           <meta name="description" content={translate('meta.description')} />
           <meta property="og:description" content={translate('meta.description')} />
         </Head>
+        <AdBlockDetector onDetect={setAdBlockDetected} />
         <Container
             header={<div>{translate('siteName')}</div>}
             footer={
@@ -113,9 +121,13 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
               {translate('submit')}
             </Button>
           </form>
-          <div className={styles.adContainer}>
-            {translate('publicity')}
-          </div>
+          {
+            !adBlockDetected && (
+                  <div className={styles.adContainer}>
+                    {translate('publicity')}
+                  </div>
+              )
+          }
         </Container>
       </Layout>
   );
