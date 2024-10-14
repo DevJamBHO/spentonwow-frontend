@@ -19,22 +19,11 @@ const PieChart: React.FC = () => {
     const shop = useSpentStore(state => state.shop);
     const currency = useSpentStore(state => state.currency);
 
-    // Pour Deboguer, utiliser useEffect pour inspecter les données
-    useEffect(() => {
-        console.log("Extensions: ", extensions);
-    }, [extensions]);
-
-    // Calcul des coûts pour chaque catégorie en considérant seulement les éléments owned = true
     const subscriptionCost = getValueInCurrency(subscription.estimated_cost, currency);
     const extensionsCost = extensions.reduce((total, extension) => {
         const versionTotal = extension.Versions
             ?.filter(version => version.owned)
             .reduce((versionTotal, version) => versionTotal + getValueInCurrency(version.cost, currency), 0) ?? 0;
-
-        // Log pour vérification des valeurs
-        if (versionTotal > 0) {
-            console.log(`Extension: ${extension.name}, Versions Total: ${versionTotal}`);
-        }
 
         return total + versionTotal;
     }, 0);

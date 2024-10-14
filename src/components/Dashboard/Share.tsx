@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXTwitter, faDiscord, faReddit } from "@fortawesome/free-brands-svg-icons";
+import { faXTwitter, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import styles from "@/styles/SubContainer.module.scss";
 import { formatCurrency } from "@/utils/formatCurrency";
 import useSpentStore from "@/store/useSpentStore";
 import { translate } from "@/utils/translate";
+import ModalManager from "@/components/Modal/ModalManager";
+import {useModal} from "@/context/ModalContext";
 
 interface ShareProps {
     initialAmountEur: number;
@@ -17,6 +19,7 @@ const Share: React.FC<ShareProps> = ({ initialAmountEur, initialAmountUsd }) => 
     const [localAmountEur, setLocalAmountEur] = useState<number>(initialAmountEur);
     const [localAmountUsd, setLocalAmountUsd] = useState<number>(initialAmountUsd);
     const amountToUse = currency === 'USD' ? localAmountUsd : localAmountEur;
+    const { openModal } = useModal();
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -47,10 +50,12 @@ const Share: React.FC<ShareProps> = ({ initialAmountEur, initialAmountUsd }) => 
                     className={styles.icon}
                     aria-label="Twitter"
                 >
-                    <FontAwesomeIcon icon={faXTwitter} />
+                    <FontAwesomeIcon icon={faXTwitter}/>
                 </a>
-                <FontAwesomeIcon icon={faDiscord} className={styles.icon} />
-                <FontAwesomeIcon icon={faReddit} className={styles.icon} />
+
+                <FontAwesomeIcon onClick={() => openModal('RecapVideo', 'Partager sur Instagram')} icon={faInstagram} className={styles.icon}/>
+                <FontAwesomeIcon onClick={() => openModal('RecapVideo', 'Partager sur TikTok')} icon={faTiktok} className={styles.icon}/>
+                <ModalManager/>
             </div>
         </div>
     );

@@ -1,0 +1,72 @@
+@import '@/styles/variables';
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($primary-color, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: relative;
+  background: $secondary-color;
+  padding: $space-small;
+  border-radius: $border-radius;
+  max-width: $form-max-width;
+  width: 90%;
+  box-shadow: 0 4px 15px $shadow-color;
+  transform: translateY(-50px);
+  animation: slideIn 0.3s forwards;
+  border: 1px solid rgba($highlight-color, 0.2);
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $space-small;
+}
+
+.closeButton {
+  background: $secondary-color;
+  border: none;
+  color: $highlight-color;
+  font-size: $space-big;
+  cursor: pointer;
+  border-radius: 50%;
+  width: $space-big;
+  height: $space-big;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background: $primary-color;
+}
+
+.modalTitle {
+  margin: 0;
+  color: $text-color;
+  font-size: 1.5rem;
+}

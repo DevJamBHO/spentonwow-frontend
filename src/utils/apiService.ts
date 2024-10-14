@@ -1,24 +1,30 @@
-export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
+export const apiFetch = async (url: string, options: RequestInit = {}) => {
+    const isFormData = options.body instanceof FormData;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-    const url = `${baseUrl}${endpoint}`;
-
-    const defaultOptions: RequestInit = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        ...options,
+    const headers: Record<string, string> = {
+        ...(options.headers ? options.headers as Record<string, string> : {}),
     };
 
-    try {
-        const response = await fetch(url, defaultOptions);
+    if (!isFormData && !headers['Content-Type']) {
+        headers['Content-Type'] = 'application/json';
+    }
 
-        if (!response.ok) {
-            throw new Error(`API error: ${response.status} ${response.statusText}`);
+    try {
+        const response = await fetch(`${baseUrl}${url}`, {
+            ...options,
+            headers,
+        });
+
+        // Vérifier si la réponse est au format JSON
+        if (response.headers.get('Content-Type')?.includes('application/json')) {
+            return await response.json();
         }
 
-        return await response.json();
+        // Sinon, retourner le texte brut
+        return await response.text();
     } catch (error) {
+        console.error('Erreur lors de la requête fetch:', error);
         throw error;
     }
 };
