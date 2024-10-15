@@ -5,12 +5,12 @@ import Loading from "@/components/Loading";
 const RecapVideo: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [videoUrl, setVideoUrl] = useState<string | null>(null);
-    const [webMUrl, setWebMUrl] = useState<string | null>(null); // WebM URL as backup
+    const [webMUrl, setWebMUrl] = useState<string | null>(null);
     const [processing, setProcessing] = useState<boolean>(false);
 
     const words = ["Bonjour", "Salut", "Coucou", "Hola", "Au revoir"];
-    const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFA533"];
     const [index, setIndex] = useState<number>(0);
+    const [animationOffset, setAnimationOffset] = useState<number>(0);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -25,22 +25,41 @@ const RecapVideo: React.FC = () => {
         if (canvas) {
             const ctx = canvas.getContext('2d');
             if (ctx) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = colors[index];
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                const gradientAnimation = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                ctx.font = '60px Arial';
-                ctx.fillStyle = '#FFFFFF';
-                ctx.textAlign = 'center';
-                ctx.fillText(words[index], canvas.width / 2, canvas.height / 2);
+                    const gradient = ctx.createLinearGradient(
+                        -canvas.width / 2 + animationOffset, 0,
+                        canvas.width / 2 + animationOffset, canvas.height
+                    );
+                    gradient.addColorStop(0, '#121212');
+                    gradient.addColorStop(0.25, '#1F1F1F');
+                    gradient.addColorStop(0.5, '#1F1F1F');
+                    gradient.addColorStop(0.75, '#1F1F1F');
+                    gradient.addColorStop(1, '#121212');
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Ajout du texte en haut à gauche, taille augmentée
-                ctx.font = '40px Arial';
-                ctx.textAlign = 'left';
-                ctx.fillText('spentonwow.com', 10, 40);
+                    ctx.font = '60px Arial';
+                    ctx.fillStyle = '#E0E0E0';
+                    ctx.textAlign = 'center';
+                    ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+                    ctx.shadowBlur = 5;
+                    ctx.fillText(words[index], canvas.width / 2, canvas.height / 2);
+
+                    ctx.font = '40px Arial';
+                    ctx.shadowBlur = 0;
+                    ctx.textAlign = 'left';
+                    ctx.fillText('spentonwow.com', 10, 40);
+
+                    setAnimationOffset((prevOffset) => (prevOffset + 0.5) % canvas.width);
+                };
+
+                const animationId = setInterval(gradientAnimation, 100); // Reduce the animation speed
+                return () => clearInterval(animationId);
             }
         }
-    }, [index]);
+    }, [index, animationOffset]);
 
     useEffect(() => {
         if (!canvasRef.current) return;
@@ -117,13 +136,19 @@ const RecapVideo: React.FC = () => {
 
     return (
         <div className="text-center">
-            <canvas ref={canvasRef} width={1080} height={1920} style={{ display: 'none' }} />
-            {videoUrl && (
-                <div className="mt-4">
-                    <video src={videoUrl} controls width="400" />
-                </div>
-            )}
+            <canvas ref={canvasRef} width={1080} height={1920} style={{display: 'none'}} />
             {processing && <Loading />}
+            {videoUrl && (
+                <video
+                    src={videoUrl}
+                    controls
+                    width="400"
+                    style={{
+                        border: '1px solid #121212',
+                        borderRadius: '8px'
+                    }}
+                />
+            )}
         </div>
     );
 };
