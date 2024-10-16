@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
 import Loading from './Loading';
+import {translate} from "@/utils/translate";
 
 interface VideoWrapperProps {
     children: React.ReactNode;
@@ -106,7 +107,7 @@ const VideoWrapper: React.FC<VideoWrapperProps> = ({ children, animationDuration
                         {children}
                     </div>
                     <div style={{width: '100%', height: '100%'}}>
-                        Création de la vidéo en cours....
+                        {translate('loadingVideo')}
                         <Loading progress={progress} />
                     </div>
                 </>
