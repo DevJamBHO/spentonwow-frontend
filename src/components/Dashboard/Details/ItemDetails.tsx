@@ -111,7 +111,7 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                                     <div>
                                         {
                                             item.components ?
-                                                <div className={styles['test']}>
+                                                <div className={styles['components']}>
                                                     {item.components.map((sub_item, sub_key) => (
                                                         <div key={`${item.name}-${sub_key}`}>
                                                             {sub_item.wow_head_link ? (

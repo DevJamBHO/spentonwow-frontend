@@ -27,7 +27,7 @@
     border: solid 5px $primary-color;
     border-radius: $border-radius;
     margin-bottom: $space-small;
-    padding: $space-small;
+    padding: calc($space-small / 2);
   }
 
   .period-date {
@@ -42,18 +42,10 @@
     }
   }
 
-  .test {
+  .components {
     display: flex;
     flex-direction: column;
     gap: calc($space-small / 2);
-  }
-
-  .coucou {
-    background-color: $primary-color;
-    border-radius: $border-radius;
-    .shop-collect {
-      padding: $space-small $space-medium;
-    }
   }
 
   .subscription,
