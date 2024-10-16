@@ -106,6 +106,7 @@ const VideoWrapper: React.FC<VideoWrapperProps> = ({ children, animationDuration
                         {children}
                     </div>
                     <div style={{width: '100%', height: '100%'}}>
+                        Création de la vidéo en cours....
                         <Loading progress={progress} />
                     </div>
                 </>

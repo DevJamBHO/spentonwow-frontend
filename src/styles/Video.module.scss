@@ -45,7 +45,7 @@ $red: #F3886B;
 
     .screen {
       width: 90%;
-      height: 90%;
+      height: 100%;
       position: relative;
       background: $darkgray;
       border: 3px solid $line;
@@ -54,6 +54,7 @@ $red: #F3886B;
       justify-content: center;
       align-items: center;
       margin-top: 10px;
+      margin-bottom: 10px;
 
       .inner {
         width: 90%;
