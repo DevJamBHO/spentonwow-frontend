@@ -24,9 +24,10 @@
   .subscription-period {
     display: flex;
     justify-content: space-between;
+    border: solid 5px $primary-color;
+    border-radius: $border-radius;
     margin-bottom: $space-small;
-    margin-left: $space-small;
-    margin-right: $space-small;
+    padding: $space-small;
   }
 
   .period-date {
@@ -35,10 +36,25 @@
     .wowhead-link {
       display: flex;
       flex-direction: row;
+      text-align: center;
+      align-items: center;
       gap: calc($space-small / 2);
     }
   }
 
+  .test {
+    display: flex;
+    flex-direction: column;
+    gap: calc($space-small / 2);
+  }
+
+  .coucou {
+    background-color: $primary-color;
+    border-radius: $border-radius;
+    .shop-collect {
+      padding: $space-small $space-medium;
+    }
+  }
 
   .subscription,
   .extensions,

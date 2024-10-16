@@ -21,7 +21,7 @@ const PieChart: React.FC = () => {
 
     const subscriptionCost = getValueInCurrency(subscription.estimated_cost, currency);
     const extensionsCost = extensions.reduce((total, extension) => {
-        const versionTotal = extension.Versions
+        const versionTotal = extension.versions
             ?.filter(version => version.owned)
             .reduce((versionTotal, version) => versionTotal + getValueInCurrency(version.cost, currency), 0) ?? 0;
 
@@ -42,18 +42,36 @@ const PieChart: React.FC = () => {
         return total;
     }, 0);
 
+    const toysCost = shop.toys.reduce((total, toy) => {
+        if (toy.owned) {
+            return total + getValueInCurrency(toy.cost, currency);
+        }
+        return total;
+    }, 0);
+
+    const bundlesCost = shop.bundles.reduce((total, bundle) => {
+        if (bundle.owned) {
+            return total + getValueInCurrency(bundle.cost, currency);
+        }
+        return total;
+    }, 0);
+
     const expenses: ExpenseData[] = [
         { category: 'subscription', amount: subscriptionCost },
         { category: 'extensions', amount: extensionsCost },
         { category: 'mounts', amount: mountsCost },
-        { category: 'pets', amount: petsCost }
+        { category: 'pets', amount: petsCost },
+        { category: 'toys', amount: toysCost },
+        { category: 'bundles', amount: bundlesCost }
     ];
 
     const colors = [
         '#6E2317',
         '#B28354',
         '#7D6150',
-        '#47261F'
+        '#47261F',
+        '#806E83',
+        '#E38B31'
     ];
 
     const totalAmount = expenses.reduce((sum, expense) => sum + expense.amount, 0);

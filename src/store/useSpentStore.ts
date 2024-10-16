@@ -10,7 +10,8 @@ export interface Cost {
 export interface SpentDetail {
     name: string;
     owned: boolean;
-    Versions?: { edition: string; owned: boolean; cost: Cost }[];
+    versions?: { edition: string; owned: boolean; cost: Cost }[];
+    components?: [SpentDetail];
     cost: Cost;
     wow_head_link?: {id: number; path: string; type: string; icon?: string}
 }
@@ -34,7 +35,7 @@ interface SpentState {
     startYear: number;
     amountInCurrentCurrency: number;
     extensions: SpentDetail[];
-    shop: { mounts: SpentDetail[]; pets: SpentDetail[] };
+    shop: { mounts: SpentDetail[]; pets: SpentDetail[]; bundles: SpentDetail[]; toys: SpentDetail[] };
     subscription: SubscriptionDetail;
     setCurrency: (value: "EUR" | "USD") => void;
     fetchSpentData: (region: string | string[], server: string | string[], character: string | string[]) => Promise<void>;
@@ -45,7 +46,7 @@ const useSpentStore = create<SpentState>((set, get) => ({
     amountEur: 0,
     amountUsd: 0,
     extensions: [],
-    shop: { mounts: [], pets: [] },
+    shop: { mounts: [], pets: [], bundles: [], toys: [] },
     startYear: new Date().getFullYear(),
     subscription: {
         estimated_cost: { eur: 0, dol: 0 },

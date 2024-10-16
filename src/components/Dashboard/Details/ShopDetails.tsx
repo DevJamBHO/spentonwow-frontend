@@ -8,9 +8,10 @@ interface ShopDetailsProps {
     shopList: SpentDetail[];
     currency: string;
     getValueInCurrency: (values: Cost) => number;
+    title: string
 }
 
-const ShopDetails: React.FC<ShopDetailsProps> = ({ shopList, currency, getValueInCurrency }) => {
+const ShopDetails: React.FC<ShopDetailsProps> = ({ shopList, currency, getValueInCurrency, title }) => {
     const [showShopNotOwned, setShowShopNotOwned] = useState(false);
 
     const countOwnedItems = (items: SpentDetail[]): number => {
@@ -18,8 +19,8 @@ const ShopDetails: React.FC<ShopDetailsProps> = ({ shopList, currency, getValueI
             if (item.owned) {
                 count += 1;
             }
-            if (item.Versions) {
-                count += item.Versions.filter(version => version.owned).length;
+            if (item.versions) {
+                count += item.versions.filter(version => version.owned).length;
             }
             return count;
         }, 0);
@@ -27,7 +28,7 @@ const ShopDetails: React.FC<ShopDetailsProps> = ({ shopList, currency, getValueI
 
     return (
         <div>
-            <p>{translate('shop')} ({translate('owned', {count: countOwnedItems(shopList)})}) :</p>
+            <p>{translate(title)} ({translate('owned', {count: countOwnedItems(shopList)})}) :</p>
             <div className={styles.shop}>
                 {shopList?.length > 0 && shopList.map((item, key) => (
                     <ItemDetails key={`shop-${key}`} item={item} keyIndex={key} showNotOwned={showShopNotOwned} getValueInCurrency={getValueInCurrency} currency={currency} />

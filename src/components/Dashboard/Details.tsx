@@ -1,6 +1,5 @@
-// #file: Details.tsx
 import React, { FC } from "react";
-import useSpentStore, { Cost, SpentDetail, SubscriptionDetail, SubscriptionPeriod } from "@/store/useSpentStore";
+import useSpentStore, { Cost, SubscriptionDetail } from "@/store/useSpentStore";
 import styles from '@/styles/Details.module.scss';
 
 import SubscriptionDetails from '@/components/Dashboard/Details/SubscriptionDetails';
@@ -13,21 +12,18 @@ const Details: FC = () => {
     const currency = useSpentStore(state => state.currency);
     const subscription: SubscriptionDetail = useSpentStore(state => state.subscription);
 
-    const getCombinedShopList = (shop: { mounts: SpentDetail[]; pets: SpentDetail[] }): SpentDetail[] => {
-        return [...(shop.mounts || []), ...(shop.pets || [])];
-    };
-
     const getValueInCurrency = (values: Cost): number => {
         return currency === 'USD' ? values.dol : values.eur;
     };
-
-    const shopList = getCombinedShopList(shop);
 
     return (
         <div className={styles.details}>
             <SubscriptionDetails subscription={subscription} currency={currency} getValueInCurrency={getValueInCurrency} />
             <ExtensionDetails extensionList={extensionList} currency={currency} getValueInCurrency={getValueInCurrency} />
-            <ShopDetails shopList={shopList} currency={currency} getValueInCurrency={getValueInCurrency} />
+            <ShopDetails title="mounts" shopList={shop.mounts} currency={currency} getValueInCurrency={getValueInCurrency} />
+            <ShopDetails title="pets" shopList={shop.pets} currency={currency} getValueInCurrency={getValueInCurrency} />
+            <ShopDetails title="toys" shopList={shop.toys} currency={currency} getValueInCurrency={getValueInCurrency} />
+            <ShopDetails title="bundles" shopList={shop.bundles} currency={currency} getValueInCurrency={getValueInCurrency} />
         </div>
     );
 };

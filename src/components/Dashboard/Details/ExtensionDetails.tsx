@@ -18,8 +18,8 @@ const ExtensionDetails: React.FC<ExtensionDetailsProps> = ({ extensionList, curr
             if (item.owned) {
                 count += 1;
             }
-            if (item.Versions) {
-                count += item.Versions.filter(version => version.owned).length;
+            if (item.versions) {
+                count += item.versions.filter(version => version.owned).length;
             }
             return count;
         }, 0);
