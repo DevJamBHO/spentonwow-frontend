@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import html2canvas from 'html2canvas';
 
 const RecapImage: React.FC = () => {
+    const captureRef = useRef<HTMLDivElement>(null);
+
+    const handleCaptureClick = async () => {
+        if (captureRef.current) {
+            const canvas = await html2canvas(captureRef.current);
+            const image = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = image;
+            link.download = 'recap.png';
+            link.click();
+        }
+    };
 
     return (
         <div>
-            Image
+            <div ref={captureRef} style={{ padding: '20px', textAlign: 'center', border: '1px solid #ccc' }}>
+                Ceci est le contenu à capturer.
+            </div>
+            <button onClick={handleCaptureClick} style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}>
+                Capturer Image
+            </button>
         </div>
     );
 };
