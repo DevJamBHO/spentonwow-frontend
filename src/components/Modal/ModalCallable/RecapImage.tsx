@@ -7,17 +7,17 @@ const RecapImage: React.FC = () => {
     const handleCaptureClick = async () => {
         if (captureRef.current) {
             const canvas = await html2canvas(captureRef.current);
-            const image = canvas.toDataURL('image/png');
+            const image = canvas.toDataURL('image/jpeg');
             const link = document.createElement('a');
             link.href = image;
-            link.download = 'recap.png';
+            link.download = 'recap.jpeg';
             link.click();
         }
     };
 
     return (
         <div>
-            <div ref={captureRef} style={{ padding: '20px', textAlign: 'center', border: '1px solid #ccc' }}>
+            <div ref={captureRef} style={{ padding: '20px', textAlign: 'center', border: '1px solid #ccc', backgroundColor: 'red' }}>
                 Ceci est le contenu à capturer.
             </div>
             <button onClick={handleCaptureClick} style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}>
