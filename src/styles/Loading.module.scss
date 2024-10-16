@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'LCD';
+  src: url('../fonts/DS-DIGI.TTF') format('truetype');
+}
+
+.lcd-text {
+  font-family: 'LCD', monospace;
+}
+
 .calcContainer {
   display: flex;
   justify-content: center;

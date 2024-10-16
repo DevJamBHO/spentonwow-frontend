@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import styles from '@/styles/Loading.module.scss';
 import { gsap } from 'gsap';
+import styles from '@/styles/Loading.module.scss';
 
 class RColor {
     hue: number;
@@ -79,25 +79,28 @@ class RColor {
     }
 }
 
-const Loading: React.FC = () => {
+interface LoadingProps {
+    progress?: number;
+}
+
+const Loading: React.FC<LoadingProps> = ({ progress }) => {
     useEffect(() => {
         const animateCalculator = (counter: number) => {
             const polys = document.querySelectorAll("#calc g polygon");
             const rand = Math.floor(Math.random() * polys.length);
             const item = polys[rand] as HTMLElement | undefined;
-            const screen = document.getElementById("screen") as HTMLElement | null;
+            const screen = document.getElementById("screenText") as HTMLElement | null;
 
             if (!item || !screen) return;
 
-            const color = new RColor();
-            const color2 = "#E0E0E0";
+            const color2 = "#121212";
             const color1 = "#FFD700";
 
             gsap.to(screen, { duration: 0.5, fill: color2 });
             gsap.to(item, {
                 duration: 0.5,
                 fill: color1,
-                onComplete: function() {
+                onComplete: function () {
                     counter++;
                     item.style.fill = "#E0E0E0";
 
@@ -112,6 +115,17 @@ const Loading: React.FC = () => {
         animateCalculator(0);
     }, []);
 
+    useEffect(() => {
+        const screenText = document.getElementById("screenText") as HTMLElement | null;
+        if (screenText) {
+            // Mise à jour du contenu du texte et des attributs pour s'assurer qu'il reste lisible
+            screenText.textContent = progress !== undefined ? `${Math.round(progress)}%` : '';
+            // Changer la couleur après mise à jour
+            screenText.setAttribute("fill", "#121212");
+            screenText.setAttribute("text-anchor", "middle");
+        }
+    }, [progress]);
+
     return (
         <div className={styles.calcContainer}>
             <svg xmlns="http://www.w3.org/2000/svg" id="calc" className={styles.calc} clipRule="evenodd" fillRule="evenodd" imageRendering="optimizeQuality" shapeRendering="geometricPrecision" textRendering="geometricPrecision" viewBox="0 0 500 500" width="200" height="200">
@@ -120,14 +134,11 @@ const Loading: React.FC = () => {
                         <stop offset="0" stopColor="#1F1F1F" />
                         <stop offset="1" stopColor="#1F1F1F" />
                     </linearGradient>
-                    <linearGradient gradientUnits="userSpaceOnUse" id="b" x1="249.998" x2="249.998" y1="62.399" y2="137.599">
-                        <stop offset="0" stopColor="#FF0000" /> // Ton sombre
-                        <stop offset="1" stopColor="#0000FF" /> // Ton plus clair
-                    </linearGradient>
                 </defs>
                 <g>
                     <path d="M100 30h300c11 0 20 9 20 20v400c0 11-9 20-20 20h-300c-11 0-20-9-20-20v-400c0-11 9-20 20-20z" fill="url(#a)" stroke="#121212" strokeWidth="10" />
-                    <path id="screen" d="M120 60h260c6 0 10 4 10 10v60c0 6-4 10-10 10h-260c-6 0-10-4-10-10v-60c0-6 4-10 10-10z" fill="url(#b)" stroke="#121212" strokeWidth="10" />
+                    <rect id="screen" x="120" y="60" width="260" height="80" rx="10" ry="10" fill="#E0E0E0" stroke="#121212" strokeWidth="10" />
+                    <text id="screenText" className="lcd-text" x="300" y="120" fontFamily="LCD" fontSize="70" fill="#121212" textAnchor="middle" />
                     <polygon fill="#E0E0E0" points="190,175 235,175 235,220 190,220" />
                     <polygon fill="#E0E0E0" points="265,175 310,175 310,220 265,220" />
                     <polygon fill="#E0E0E0" points="335,175 380,175 380,220 335,220" />
