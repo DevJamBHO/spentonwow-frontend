@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXTwitter, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import {faVideo, faImage} from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/SubContainer.module.scss";
 import { formatCurrency } from "@/utils/formatCurrency";
 import useSpentStore from "@/store/useSpentStore";
@@ -53,8 +54,8 @@ const Share: React.FC<ShareProps> = ({ initialAmountEur, initialAmountUsd }) => 
                     <FontAwesomeIcon icon={faXTwitter}/>
                 </a>
 
-                <FontAwesomeIcon onClick={() => openModal('RecapVideo', 'Partager sur Instagram')} icon={faInstagram} className={styles.icon}/>
-                <FontAwesomeIcon onClick={() => openModal('RecapVideo', 'Partager sur TikTok')} icon={faTiktok} className={styles.icon}/>
+                <FontAwesomeIcon onClick={() => openModal('RecapVideo', 'Partager vidéo')} icon={faVideo} className={styles.icon}/>
+                <FontAwesomeIcon onClick={() => openModal('RecapImage', 'Partager image')} icon={faImage} className={styles.icon}/>
                 <ModalManager/>
             </div>
         </div>

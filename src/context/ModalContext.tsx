@@ -18,6 +18,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
     const componentMapper: { [key: string]: React.ComponentType } = {
         RecapVideo: dynamic(() => import('@/components/Modal/ModalCallable/RecapVideo')),
+        RecapImage: dynamic(() => import('@/components/Modal/ModalCallable/RecapImage')),
     };
 
     const openModal = (componentName: string, title: string) => {
