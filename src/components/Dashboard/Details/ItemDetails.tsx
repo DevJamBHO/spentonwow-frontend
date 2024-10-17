@@ -32,8 +32,7 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                 {showNotOwned && allNotOwnedVersions.length > 0 && (
                     <div>
                         {allNotOwnedVersions.map((version, index) => (
-                            <div className={styles['subscription-period']}
-                                 key={`${item.name}-${version.edition}-${index}`}>
+                            <div className={styles['subscription-period']} key={`${item.name}-${version.edition}-${index}`}>
                                 <div className={styles['period-date']}>
                                     <div>{`${item.name} - ${version.edition}`} ({translate('notOwned')})</div>
                                 </div>
@@ -64,7 +63,7 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                                     <div>
                                         {
                                             item.components ?
-                                                <div className={styles['test']}>
+                                                <div className={styles['components']}>
                                                     {item.components.map((sub_item, sub_key) => (
                                                         <div key={`${item.name}-${sub_key}`}>
                                                             {sub_item.wow_head_link ? (
