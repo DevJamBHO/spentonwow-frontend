@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Layout.module.scss';
+import Footer from "@/components/Footer";
 interface LayoutProps {
     children: React.ReactNode;
     big?: boolean;
@@ -73,6 +74,7 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
                     {children}
                 </div>
             </div>
+            <Footer />
         </>
     );
 };

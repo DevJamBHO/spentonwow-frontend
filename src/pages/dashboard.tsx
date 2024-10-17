@@ -12,14 +12,13 @@ import { translate } from '@/utils/translate';
 import Details from '@/components/Dashboard/Details';
 import FakeDetails from '@/components/Dashboard/FakeDetails';
 import AdBlockDetector from '@/components/AdBlockDetector';
-import Share from '@/components/Dashboard/Share'; // Assurez-vous que le chemin est correct
+import Share from '@/components/Dashboard/Share';
 import Wowchievement from '@/components/Dashboard/Wowchievement';
 import Loading from '@/components/Loading';
-import PieChart, { ExpenseData } from '@/components/Dashboard/PieChart';
+import PieChart from '@/components/Dashboard/PieChart';
 import { trackPlausibleEvent } from '@/utils/plausible';
 import {GetServerSidePropsContext} from "next";
 import FakePieChart from "@/components/Dashboard/FakePieChart";
-import RecapVideo from "@/components/Modal/ModalCallable/RecapVideo"; // Import de la fonction de suivi Plausible
 
 interface DashboardProps {
     initialAmountEur: number;
