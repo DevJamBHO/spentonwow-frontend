@@ -71,12 +71,6 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
         <AdBlockDetector onDetect={setAdBlockDetected} />
         <Container
             header={<div>{translate('siteName')}</div>}
-            footer={
-              <div>
-                <p>&copy; 2024 {translate('siteName')}. {translate('allRightsReserved')}</p>
-                <p>{translate('termsAndConditions')} | {translate('privacyPolicy')}</p>
-              </div>
-            }
         >
           <section className={styles.intro}>
             <p>{translate('introText1')}</p><br/>
