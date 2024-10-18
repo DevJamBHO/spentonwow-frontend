@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
             className={styles.bubble}
             style={{
                 '--size': `${2 + Math.random() * 4}rem`,
-                '--distance': `${6 + Math.random() * 4}rem`,
-                '--position': `${-5 + Math.random() * 110}%`,
+                '--distance': `${10 + Math.random() * 4}rem`,
+                '--position': `${5 + Math.random() * 90}%`,
                 '--time': `${2 + Math.random() * 2}s`,
                 '--delay': `${-1 * (2 + Math.random() * 2)}s`,
             } as React.CSSProperties}
@@ -22,11 +22,27 @@ const Footer: React.FC = () => {
                 {bubbles}
             </div>
             <div className={styles.content}>
-                <div>
-                    COUCOU
+                <div className={styles.contentBody}>
+                    <div>
+                        spentonwow@gmail.com
+                    </div>
+                    <div>
+                        <a href="/legals">
+                            Mentions légales
+                        </a>
+                        <a href="/confidentiality">
+                            Politique de confidentialité
+                        </a>
+                        <a href="/cookies">
+                            Politique de cookies
+                        </a>
+                    </div>
+                </div>
+                <div className={styles.end}>
+                    <div>&copy; 2024 <a href="https://saplingtoss.com" target="_blank">Sapling-Toss</a>. Tous droits réservés.</div>
                 </div>
             </div>
-            <svg style={{ position: 'fixed', top: '100vh' }}>
+            <svg style={{position: 'fixed', top: '100vh'}}>
                 <defs>
                     <filter id="blob">
                         <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
