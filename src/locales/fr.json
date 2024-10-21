@@ -18,6 +18,7 @@
   "character": "Personnage:",
   "submit": "Soumettre",
   "subscription": "Abonnements",
+  "search": "Rechercher...",
   "year": "{count} {count_singular:an,count_plural:ans}",
   "month": "{count} {count_singular:mois,count_plural:mois}",
   "owned": "{count} {count_singular:possédé,count_plural:possédés}",

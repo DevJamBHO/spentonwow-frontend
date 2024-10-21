@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '@/styles/Select.module.scss';
+import {translate} from "@/utils/translate";
 
 interface SelectOption {
     value: string;
@@ -62,7 +63,7 @@ const Select: React.FC<SelectProps> = ({ id, value, onChange, label, options, cl
                             onFocus={handleInputFocus}
                             onBlur={handleInputBlur}
                             className={filterInputClassName}
-                            placeholder="Search..."
+                            placeholder={translate('search')}
                         />
                         <ul className={optionsListClassName}>
                             {filteredOptions.map(option => (
