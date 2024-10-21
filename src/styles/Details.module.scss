@@ -46,6 +46,10 @@
     display: flex;
     flex-direction: column;
     gap: calc($space-small / 2);
+    &.version {
+      padding-left: $space-small;
+      padding-top: calc($space-small / 2);
+    }
   }
 
   .subscription,
@@ -68,7 +72,11 @@
 
       .item-name {
         display: flex;
-        align-items: center;
+        align-items: start;
+        flex-direction: column;
+        .item-sub-name {
+          background-color: red;
+        }
       }
 
       div {

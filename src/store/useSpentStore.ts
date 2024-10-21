@@ -7,13 +7,27 @@ export interface Cost {
     eur: number;
 }
 
+interface WowHeadLink {
+    id: number;
+    path: string;
+    type: string;
+    icon?: string
+}
+
+interface IncludeItem {
+    id: number;
+    name: string;
+    type: string;
+    wow_head_link?: WowHeadLink
+}
+
 export interface SpentDetail {
     name: string;
     owned: boolean;
-    versions?: { edition: string; owned: boolean; cost: Cost }[];
+    versions?: { edition: string; owned: boolean; cost: Cost; includes: [IncludeItem] }[];
     components?: [SpentDetail];
     cost: Cost;
-    wow_head_link?: {id: number; path: string; type: string; icon?: string}
+    wow_head_link?: WowHeadLink
 }
 
 export interface SubscriptionDetail {

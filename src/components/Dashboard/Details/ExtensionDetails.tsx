@@ -30,7 +30,14 @@ const ExtensionDetails: React.FC<ExtensionDetailsProps> = ({ extensionList, curr
             <p>{translate('extensions')} ({translate('owned', {count: countOwnedItems(extensionList)})}) :</p>
             <div className={styles.extensions}>
                 {extensionList?.length > 0 && extensionList.map((item, key) => (
-                    <ItemDetails key={`extension-${key}`} item={item} keyIndex={key} showNotOwned={showExtensionNotOwned} getValueInCurrency={getValueInCurrency} currency={currency} />
+                    <ItemDetails
+                        key={`extension-${key}`}
+                        item={item}
+                        keyIndex={key}
+                        showNotOwned={showExtensionNotOwned}
+                        getValueInCurrency={getValueInCurrency}
+                        currency={currency}
+                    />
                 ))}
                 {extensionList.filter(item => !item.owned).length > 0 && (
                     <div className={styles['not-owned-count']} onClick={() => setShowExtensionNotOwned(!showExtensionNotOwned)}>

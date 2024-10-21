@@ -23,6 +23,26 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                     <div className={styles['shop-item']} key={`${item.name}-${ownedVersion.edition}-${verKey}`}>
                         <div className={styles['item-name']}>
                             <div>{`${item.name} - ${ownedVersion.edition}`}</div>
+                            {ownedVersion.includes && (
+                                <div className={`${styles['components']} ${styles['version']}`}>
+                                    {ownedVersion.includes.map((component) => (
+                                        <div>
+                                            {component.wow_head_link ? (
+                                                <WowHeadTooltip
+                                                    id={component.wow_head_link.id}
+                                                    type={component.wow_head_link.type}
+                                                    icon={component.wow_head_link.icon}
+                                                    name={component.name}
+                                                />
+                                            ) : (
+                                                <div>
+                                                    {component.name}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                         <div>
                             {formatCurrency(getValueInCurrency(ownedVersion.cost), { currency })}
@@ -35,6 +55,26 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                             <div className={styles['subscription-period']} key={`${item.name}-${version.edition}-${index}`}>
                                 <div className={styles['period-date']}>
                                     <div>{`${item.name} - ${version.edition}`} ({translate('notOwned')})</div>
+                                    {version.includes && (
+                                        <div className={`${styles['components']} ${styles['version']}`}>
+                                            {version.includes.map((component) => (
+                                                <div>
+                                                    {component.wow_head_link ? (
+                                                        <WowHeadTooltip
+                                                            id={component.wow_head_link.id}
+                                                            type={component.wow_head_link.type}
+                                                            icon={component.wow_head_link.icon}
+                                                            name={component.name}
+                                                        />
+                                                    ) : (
+                                                        <div>
+                                                            {component.name}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className={styles['period-length']}>
                                     {formatCurrency(getValueInCurrency(version.cost), { currency })}
