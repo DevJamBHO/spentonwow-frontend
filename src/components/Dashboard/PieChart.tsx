@@ -78,6 +78,9 @@ const PieChart: React.FC = () => {
     let cumulativePercent = 0;
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+
+    expenses.sort((a, b) => b.amount - a.amount);
+
     const getCoordinatesForPercent = (percent: number) => {
         const x = Math.cos(2 * Math.PI * percent);
         const y = Math.sin(2 * Math.PI * percent);
