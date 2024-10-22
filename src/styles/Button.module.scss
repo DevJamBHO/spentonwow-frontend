@@ -27,7 +27,7 @@
     box-shadow: none;
 
     &:hover {
-      color: lighten($highlight-color, 20%);
+      color: lighten($primary-color, 20%);
       border-color: lighten($highlight-color, 20%);
     }
   }

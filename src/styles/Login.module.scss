@@ -50,6 +50,10 @@
     display: flex;
     justify-content: space-around;
   }
+  .error {
+    color: $accent-color;
+    text-align: left;
+  }
 }
 
 .adContainer {

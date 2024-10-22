@@ -44,7 +44,11 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
         if (region && server && character) {
             setLoading(true);
             fetchSpentData(region, server, character)
-                .then(() => setLoading(false));
+                .then(() => setLoading(false))
+                .catch((error: any) => {
+                    console.log('zut', error);
+                    setLoading(false);  // Assurer que le chargement se termine même en cas d'erreur
+                });
         }
     }, [region, server, character]);
 

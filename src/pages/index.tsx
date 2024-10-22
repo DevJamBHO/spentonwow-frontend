@@ -7,6 +7,7 @@ import Select from '../components/Select';
 import Container from '../components/Container';
 import styles from '../styles/Login.module.scss';
 import useCapabilitiesStore from '@/store/useCapabilitiesStore';
+import useSpentStore from '@/store/useSpentStore';
 import { GetServerSideProps } from "next";
 import { getCapabilities } from "@/api/capabilities";
 import { translate } from '@/utils/translate';
@@ -28,11 +29,13 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
   const setCapabilities = useCapabilitiesStore((state) => state.setCapabilities);
   const storedCapabilities = useCapabilitiesStore((state) => state.capabilities);
   const formatCapabilities = useCapabilitiesStore((state) => state.formatCapabilities);
+  const fetchSpentData = useSpentStore((state) => state.fetchSpentData); // Get fetchSpentData function
   const [region, setRegion] = useState<string>('');
   const [server, setServer] = useState<string>('');
   const [character, setCharacter] = useState<string>('');
   const [isClient, setIsClient] = useState<boolean>(false);
   const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
@@ -53,9 +56,14 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
     setServer('');
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push(`/dashboard?region=${region}&server=${server}&character=${character}`);
+    if (region !== '' && server !== '' && character !== '') {
+      await fetchSpentData(region, server, character);
+      router.push(`/dashboard?region=${region}&server=${server}&character=${character}`);
+    } else {
+      setErrorMessage("Tous les champs doivent être remplis !");
+    }
   };
 
   if (!isClient) {
@@ -111,6 +119,9 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
                 disabled={server === ''}
                 label={translate('character')}
             />
+            <div className={styles.error}>
+              {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+            </div>
             <Button type="submit" plain className={styles.button}>
               {translate('submit')}
             </Button>
