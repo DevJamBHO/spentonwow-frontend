@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/layouts/Layout';
 import Container from '@/components/Container';
@@ -17,8 +18,9 @@ import Wowchievement from '@/components/Dashboard/Wowchievement';
 import Loading from '@/components/Loading';
 import PieChart from '@/components/Dashboard/PieChart';
 import { trackPlausibleEvent } from '@/utils/plausible';
-import {GetServerSidePropsContext} from "next";
-import FakePieChart from "@/components/Dashboard/FakePieChart";
+import { GetServerSidePropsContext } from 'next';
+import FakePieChart from '@/components/Dashboard/FakePieChart';
+import { RedirectException } from "@/utils/apiService";
 
 interface DashboardProps {
     initialAmountEur: number;
@@ -32,7 +34,8 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
     const [isClient, setIsClient] = useState<boolean>(false);
     const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
-    const fetchSpentData = useSpentStore(state => state.fetchSpentData);
+    const fetchSpentData = useSpentStore((state) => state.fetchSpentData);
+    const router = useRouter();
 
     useEffect(() => {
         const lang = detectLanguage();
@@ -45,9 +48,13 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
             setLoading(true);
             fetchSpentData(region, server, character)
                 .then(() => setLoading(false))
-                .catch((error: any) => {
-                    console.log('zut', error);
-                    setLoading(false);  // Assurer que le chargement se termine même en cas d'erreur
+                .catch((error) => {
+                    setLoading(false);
+                    if (error instanceof RedirectException) {
+                        router.push(error.path);
+                    } else {
+                        console.error(translate('dataError'), error);
+                    }
                 });
         }
     }, [region, server, character]);

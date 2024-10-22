@@ -79,10 +79,10 @@ const useSpentStore = create<SpentState>((set, get) => ({
 
             setGoldPrice(data.token.gold_cost);
             setTokenPrice(data.token.cost);
-            state.shop = data.shop
-            state.subscription = data.subscription
-            state.extensions = data.expansions
-            state.startYear = new Date(data.first_activity).getFullYear()
+            state.shop = data.shop;
+            state.subscription = data.subscription;
+            state.extensions = data.expansions;
+            state.startYear = new Date(data.first_activity).getFullYear();
 
             set(state => ({
                 ...state,
@@ -92,6 +92,7 @@ const useSpentStore = create<SpentState>((set, get) => ({
 
         } catch (error) {
             console.error('Failed to fetch data:', error);
+            throw error;
         }
     },
     get amountInCurrentCurrency() {

@@ -36,6 +36,8 @@
   "showDetails": "Show details",
   "hideDetails": "Hide details",
   "loadingVideo": "Video being created...",
+  "redirect": "Redirection requested to",
+  "dataError": "Error fetching data",
   "films": {
     "avengersEndgame": "Avengers: Endgame",
     "avatar": "Avatar",

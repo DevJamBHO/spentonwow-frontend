@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Layout from '../layouts/Layout';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Select from '../components/Select';
-import Container from '../components/Container';
-import styles from '../styles/Login.module.scss';
+import Layout from '@/layouts/Layout';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import Select from '@/components/Select';
+import Container from '@/components/Container';
+import styles from '@/styles/Login.module.scss';
 import useCapabilitiesStore from '@/store/useCapabilitiesStore';
 import useSpentStore from '@/store/useSpentStore';
 import { GetServerSideProps } from "next";
@@ -29,7 +29,7 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
   const setCapabilities = useCapabilitiesStore((state) => state.setCapabilities);
   const storedCapabilities = useCapabilitiesStore((state) => state.capabilities);
   const formatCapabilities = useCapabilitiesStore((state) => state.formatCapabilities);
-  const fetchSpentData = useSpentStore((state) => state.fetchSpentData); // Get fetchSpentData function
+  const fetchSpentData = useSpentStore((state) => state.fetchSpentData);
   const [region, setRegion] = useState<string>('');
   const [server, setServer] = useState<string>('');
   const [character, setCharacter] = useState<string>('');

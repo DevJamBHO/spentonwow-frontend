@@ -1,3 +1,12 @@
+import {translate} from "@/utils/translate";
+
+export class RedirectException extends Error {
+    constructor(public path: string) {
+        super(`${translate('redirect')} ${path}`);
+        this.name = "RedirectException";
+    }
+}
+
 export const apiFetch = async (url: string, options: RequestInit = {}) => {
     const isFormData = options.body instanceof FormData;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -15,16 +24,14 @@ export const apiFetch = async (url: string, options: RequestInit = {}) => {
             ...options,
             headers,
         });
-
-        // Vérifier si la réponse est au format JSON
+        if (response.status !== 200) {
+            throw new RedirectException('/404');
+        }
         if (response.headers.get('Content-Type')?.includes('application/json')) {
             return await response.json();
         }
-
-        // Sinon, retourner le texte brut
         return await response.text();
     } catch (error) {
-        console.error('Erreur lors de la requête fetch:', error);
         throw error;
     }
 };

@@ -25,8 +25,8 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, keyIndex, showNotOwned,
                             <div>{`${item.name} - ${ownedVersion.edition}`}</div>
                             {ownedVersion.includes && (
                                 <div className={`${styles['components']} ${styles['version']}`}>
-                                    {ownedVersion.includes.map((component) => (
-                                        <div>
+                                    {ownedVersion.includes.map((component, componentIndex) => (
+                                        <div key={`${item.name}-${componentIndex}-version`}>
                                             {component.wow_head_link ? (
                                                 <WowHeadTooltip
                                                     id={component.wow_head_link.id}
