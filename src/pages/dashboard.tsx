@@ -49,7 +49,6 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
             fetchSpentData(region, server, character)
                 .then(() => setLoading(false))
                 .catch((error) => {
-                    setLoading(false);
                     if (error instanceof RedirectException) {
                         router.push(error.path);
                     } else {

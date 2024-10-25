@@ -1,5 +1,4 @@
 import {translate} from "@/utils/translate";
-
 export class RedirectException extends Error {
     constructor(public path: string) {
         super(`${translate('redirect')} ${path}`);
@@ -25,7 +24,8 @@ export const apiFetch = async (url: string, options: RequestInit = {}) => {
             headers,
         });
         if (response.status !== 200) {
-            throw new RedirectException('/404');
+            window.location.href = '/error'
+            return;
         }
         if (response.headers.get('Content-Type')?.includes('application/json')) {
             return await response.json();
