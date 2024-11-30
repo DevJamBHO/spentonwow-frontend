@@ -97,13 +97,6 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                     </Container>
                 </div>
                 <div className={styles.sideContainers}>
-                    {
-                        !adBlockDetected && (
-                            <Container className={styles.sideContainer}>
-                                {translate('publicity')}
-                            </Container>
-                        )
-                    }
                     <Container className={styles.sideContainer}>
                         <Share initialAmountEur={initialAmountEur} initialAmountUsd={initialAmountUsd} />
                     </Container>
