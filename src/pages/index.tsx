@@ -14,7 +14,6 @@ import { translate } from '@/utils/translate';
 import Head from "next/head";
 import AdBlockDetector from "@/components/AdBlockDetector";
 import {trackPlausibleEvent} from "@/utils/plausible";
-import AdSense from "@/components/AdSense";
 
 interface LoginProps {
   capabilities: any;
@@ -127,13 +126,6 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
               {translate('submit')}
             </Button>
           </form>
-          {
-            !adBlockDetected && (
-                  <div className={styles.adContainer}>
-                    <AdSense />
-                  </div>
-              )
-          }
         </Container>
       </Layout>
   );

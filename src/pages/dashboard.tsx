@@ -21,7 +21,6 @@ import { trackPlausibleEvent } from '@/utils/plausible';
 import { GetServerSidePropsContext } from 'next';
 import FakePieChart from '@/components/Dashboard/FakePieChart';
 import { RedirectException } from "@/utils/apiService";
-import AdSense from "@/components/AdSense";
 
 interface DashboardProps {
     initialAmountEur: number;
@@ -98,13 +97,6 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                     </Container>
                 </div>
                 <div className={styles.sideContainers}>
-                    {
-                        !adBlockDetected && (
-                            <Container className={styles.sideContainer}>
-                                <AdSense />
-                            </Container>
-                        )
-                    }
                     <Container className={styles.sideContainer}>
                         <Share initialAmountEur={initialAmountEur} initialAmountUsd={initialAmountUsd} />
                     </Container>
