@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
                 <div className={styles.end}>
-                    <div>&copy; {new Date().getFullYear()} <a href="https://saplingtoss.com" target="_blank">Sapling-Toss</a>. Tous droits réservés.</div>
+                    <div>&copy; {new Date().getFullYear()} <a href="https://sapling-toss.com/" target="_blank">Sapling-Toss</a>. Tous droits réservés.</div>
                 </div>
             </div>
             <svg style={{position: 'fixed', top: '100vh'}}>
