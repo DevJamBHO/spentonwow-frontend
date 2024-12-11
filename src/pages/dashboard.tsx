@@ -89,6 +89,14 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         <AmountSection />
                         <CardList />
                     </Container>
+
+                    {
+                        !adBlockDetected && (
+                            <Container className={styles.sideContainer}>
+                                <AdSense adSlot="8629995218" />
+                            </Container>
+                        )
+                    }
                     <Container className={styles.mainContainer}>
                         {adBlockDetected ? (
                             <FakeDetails />
@@ -98,13 +106,9 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                     </Container>
                 </div>
                 <div className={styles.sideContainers}>
-                    {
-                        !adBlockDetected && (
-                            <Container className={styles.sideContainer}>
-                                <AdSense adSlot="9722018369" />
-                            </Container>
-                        )
-                    }
+                    <Container className={styles.sideContainer}>
+                        <Share initialAmountEur={initialAmountEur} initialAmountUsd={initialAmountUsd} />
+                    </Container>
                     <Container className={styles.sideContainer}>
                         <Wowchievement region={region} server={server} character={character} />
                     </Container>
@@ -114,9 +118,6 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         ) : (
                             <PieChart />
                         )}
-                    </Container>
-                    <Container className={styles.sideContainer}>
-                        <Share initialAmountEur={initialAmountEur} initialAmountUsd={initialAmountUsd} />
                     </Container>
                 </div>
             </div>

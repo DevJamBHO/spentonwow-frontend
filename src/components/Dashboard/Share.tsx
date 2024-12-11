@@ -53,9 +53,8 @@ const Share: React.FC<ShareProps> = ({ initialAmountEur, initialAmountUsd }) => 
                 >
                     <FontAwesomeIcon icon={faXTwitter}/>
                 </a>
-
-                <FontAwesomeIcon onClick={() => openModal('RecapVideo', 'Partager vidéo')} icon={faVideo} className={styles.icon}/>
-                <FontAwesomeIcon onClick={() => openModal('RecapImage', 'Partager image')} icon={faImage} className={styles.icon}/>
+                {/* <FontAwesomeIcon onClick={() => openModal('RecapVideo', 'Partager vidéo')} icon={faVideo} className={styles.icon}/> */}
+                {/* <FontAwesomeIcon onClick={() => openModal('RecapImage', 'Partager image')} icon={faImage} className={styles.icon}/> */}
                 <ModalManager/>
             </div>
         </div>
