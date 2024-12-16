@@ -76,6 +76,8 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
         <Head>
           <meta name="description" content={translate('meta.description')} />
           <meta property="og:description" content={translate('meta.description')} />
+          <meta name="title" content={translate('meta.title')} />
+          <meta property="og:title" content={translate('meta.title')} />
         </Head>
         <AdBlockDetector onDetect={setAdBlockDetected} />
         <Container

@@ -13,8 +13,11 @@ const setLanguage = (lang: 'en' | 'fr') => {
     language = lang;
 };
 
-const getLanguage = () => {
+const getLanguage = (): string => {
     if (!language) {
+        if (typeof window === 'undefined') {
+            return 'en';
+        }
         return detectLanguage();
     }
     return language;

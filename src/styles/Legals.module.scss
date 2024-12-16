@@ -1,0 +1,34 @@
+.legal {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: $space-medium;
+  justify-content: center;
+  .legalMentionWrapper {
+    @media (min-width: 600px) {
+      width: 600px;
+    }
+    .bloc {
+      display: flex;
+      flex-direction: column;
+      gap: $space_small;
+      .title {
+        padding-top: $space-medium;
+        font-size: 16px;
+        font-weight: 700;
+        &.first {
+          padding-top: 0;
+        }
+      }
+      .content {
+        font-size: 14px;
+        font-weight: 700;
+        .question {
+          font-weight: 600;
+          border-bottom: solid 1px;
+        }
+      }
+    }
+
+  }
+}

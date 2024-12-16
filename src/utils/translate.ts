@@ -33,7 +33,7 @@ const translate = (key: string, props?: Record<string, string | number>): string
         }
     }
 
-    if (props?.count || props?.count === 0 ) {
+    if (props?.count || props?.count === 0) {
         translation = formatCountString(translation.replace('{count}', props.count), props.count as number);
     }
 
