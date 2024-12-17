@@ -95,6 +95,12 @@
     "description": "Calculez et suivez facilement vos dépenses dans World of Warcraft, y compris les abonnements, microtransactions et achats en jeu. Découvrez combien vous avez réellement investi dans WoW.",
     "descriptionDashboard": "Tu veux savoir combien j'ai dépensé sur WoW ? La réponse est ici !"
   },
+  "footer": {
+    "legalMention": "Mentions légales",
+    "confidentiality": "Politique de confidentialité",
+    "cookies": "Politique de cookies",
+    "reserved": "Tous droits réservés"
+  },
   "legal": {
     "legalMention": {
       "identificationTitle": "Identification de l'éditeur du site",
