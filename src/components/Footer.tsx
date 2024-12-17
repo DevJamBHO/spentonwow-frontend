@@ -1,5 +1,8 @@
 import React from 'react';
 import styles from '@/styles/Footer.module.scss';
+import { faXTwitter, faDiscord } from "@fortawesome/free-brands-svg-icons";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Footer: React.FC = () => {
     const bubbles = Array.from({ length: 128 }, (_, i) => (
@@ -24,9 +27,6 @@ const Footer: React.FC = () => {
             <div className={styles.content}>
                 <div className={styles.contentBody}>
                     <div>
-                        spentonwow@gmail.com
-                    </div>
-                    <div>
                         <a href="/legals">
                             Mentions légales
                         </a>
@@ -37,9 +37,16 @@ const Footer: React.FC = () => {
                             Politique de cookies
                         </a>
                     </div>
+                    <div className={styles.links}>
+                        <a href="https://discord.gg/us4ySEdA2w"><FontAwesomeIcon icon={faDiscord}/>Discord</a>
+                        <a href="https://x.com/wowchievement"><FontAwesomeIcon icon={faXTwitter}/>X (twitter)</a>
+                        <a href="mailto:support@wowchievement.com"><FontAwesomeIcon icon={faEnvelope}/>Mail</a>
+                    </div>
                 </div>
                 <div className={styles.end}>
-                    <div>&copy; {new Date().getFullYear()} <a href="https://sapling-toss.com/" target="_blank">Sapling-Toss</a>. Tous droits réservés.</div>
+                    <div>&copy; {new Date().getFullYear()} <a href="https://sapling-toss.com/"
+                                                              target="_blank">Sapling-Toss</a>. Tous droits réservés.
+                    </div>
                 </div>
             </div>
             <svg style={{position: 'fixed', top: '100vh'}}>
