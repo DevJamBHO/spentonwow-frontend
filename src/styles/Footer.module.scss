@@ -56,20 +56,6 @@
         gap: calc($space-small / 2);
       }
     }
-    .flags {
-      display: flex;
-      flex-direction: column;
-      gap: $space-small;
-      .flag {
-        border: solid 2px $text-color;
-        border-radius: $border-radius-very-small;
-        filter: brightness(70%);
-        cursor: pointer;
-        &.active {
-          filter: brightness(100%);
-        }
-      }
-    }
   }
   .end {
     display: flex;
