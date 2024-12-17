@@ -133,7 +133,7 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
         {
             !adBlockDetected && (
                 <div className={styles.adContainer}>
-                  <AdSense adSlot="8629995218" />
+                  <AdSense />
                 </div>
             )
         }

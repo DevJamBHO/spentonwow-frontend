@@ -93,7 +93,7 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                     {
                         !adBlockDetected && (
                             <Container className={styles.sideContainer}>
-                                <AdSense adSlot="8629995218" />
+                                <AdSense />
                             </Container>
                         )
                     }

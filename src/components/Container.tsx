@@ -11,7 +11,7 @@ interface ContainerProps {
 const Container: React.FC<ContainerProps> = ({ children, header, className = '', style }) => {
     return (
         <div className={`${styles.container} ${className}`} style={style}>
-            {header && <header className={styles.header}>{header}</header>}
+            {header && <header className={styles.header}><a href="/">{header}</a></header>}
             <div className={styles.content}>{children}</div>
         </div>
     );
