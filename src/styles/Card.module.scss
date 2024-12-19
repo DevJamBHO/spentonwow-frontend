@@ -36,9 +36,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px $shadow-color;
   padding: 20px;
   position: absolute;
+  @extend %shadow_level_1;
 }
 
 .cardFront {

@@ -51,7 +51,7 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
                 <meta name="theme-color" content="#FFD700" />
                 <meta name="robots" content="index, follow" />
                 <meta name="msapplication-TileColor" content="#18181C" />
-                <meta name="msapplication-TileImage" content="/logo512.webp" />
+                <meta name="msapplication-TileImage" content="/logo.webp" />
                 <meta property="og:title" content="Spentonwow.com" />
                 <meta property="og:image" content="/logo.webp" />
                 <meta property="og:url" content="https://Spentonwow.com/" />

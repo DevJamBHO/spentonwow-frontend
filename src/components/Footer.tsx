@@ -30,13 +30,13 @@ const Footer: React.FC = () => {
             <div className={styles.content}>
                 <div className={styles.contentBody}>
                     <div>
-                        <a href="/legals">
+                        <a href={`/${language}/legals`}>
                             {translate('footer.legalMention')}
                         </a>
-                        <a href="/confidentiality">
+                        <a href={`/${language}/confidentiality`}>
                             {translate('footer.confidentiality')}
                         </a>
-                        <a href="/cookies">
+                        <a href={`/${language}/cookies`}>
                             {translate('footer.cookies')}
                         </a>
                     </div>
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
                 </div>
                 <div className={styles.end}>
                     <div>
-                        &copy; {new Date().getFullYear()}
+                        &copy; {new Date().getFullYear()}&nbsp;
                         <a href="https://sapling-toss.com/" target="_blank">Sapling-Toss</a>.
                         &nbsp;{translate('footer.reserved')}
                     </div>

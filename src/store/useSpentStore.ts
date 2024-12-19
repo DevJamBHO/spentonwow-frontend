@@ -11,23 +11,23 @@ interface WowHeadLink {
     id: number;
     path: string;
     type: string;
-    icon?: string
+    icon?: string;
 }
 
 interface IncludeItem {
     id: number;
     name: string;
     type: string;
-    wow_head_link?: WowHeadLink
+    wow_head_link?: WowHeadLink;
 }
 
 export interface SpentDetail {
     name: string;
     owned: boolean;
-    versions?: { edition: string; owned: boolean; cost: Cost; includes: [IncludeItem] }[];
-    components?: [SpentDetail];
+    versions?: { edition: string; owned: boolean; cost: Cost; includes: IncludeItem[] }[];
+    components?: SpentDetail[];
     cost: Cost;
-    wow_head_link?: WowHeadLink
+    wow_head_link?: WowHeadLink;
 }
 
 export interface SubscriptionDetail {
@@ -72,28 +72,25 @@ const useSpentStore = create<SpentState>((set, get) => ({
         const endpoint = `/spent/${region}?character=${server},${character}`;
         try {
             const data = await apiFetch(endpoint);
-            const state = get();
-            if (!data) return
+            if (!data || !data.token || !data.shop || !data.subscription || !data.expansions) return;
 
             const setTokenPrice = useTokenStore.getState().setTokenPriceInRealMoney;
             const setGoldPrice = useTokenStore.getState().setGoldPerToken;
 
             setGoldPrice(data.token.gold_cost);
             setTokenPrice(data.token.cost);
-            state.shop = data.shop;
-            state.subscription = data.subscription;
-            state.extensions = data.expansions;
-            state.startYear = new Date(data.first_activity).getFullYear();
-
             set(state => ({
                 ...state,
+                shop: data.shop,
+                subscription: data.subscription,
+                extensions: data.expansions,
+                startYear: new Date(data.first_activity).getFullYear(),
                 amountEur: data.estimated_total.eur,
                 amountUsd: data.estimated_total.dol,
             }));
 
         } catch (error) {
             console.error('Failed to fetch data:', error);
-            throw error;
         }
     },
     get amountInCurrentCurrency() {

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/layouts/Layout';
 import Container from '@/components/Container';
-import { detectLanguage, setLanguage } from '@/utils/language';
+import {detectLanguage, getLanguage, setLanguage} from '@/utils/language';
 import useSpentStore from '@/store/useSpentStore';
 import Header from '@/components/Dashboard/Header';
 import AmountSection from '@/components/Dashboard/AmountSection';
@@ -40,7 +40,9 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
 
     useEffect(() => {
         const lang = detectLanguage();
-        setLanguage(lang);
+        if (lang !== getLanguage()) {
+            setLanguage(lang);
+        }
         setIsClient(true);
     }, []);
 
@@ -51,7 +53,7 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                 .then(() => setLoading(false))
                 .catch((error) => {
                     if (error instanceof RedirectException) {
-                        router.push(error.path);
+                        //router.push(error.path);
                     } else {
                         console.error(translate('dataError'), error);
                     }

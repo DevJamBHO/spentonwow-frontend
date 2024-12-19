@@ -38,6 +38,8 @@
         text-align: center;
         align-items: center;
         justify-content: center;
+        display: flex;
+        gap: $space-small;
       }
 
       .currencySelect {
@@ -62,13 +64,10 @@
         font-size: $space-medium;
         font-weight: bold;
         color: $text-color;
-        display: flex;
-        align-items: center;
-        gap: $space-small;
+        align-items: baseline;
 
 
         @media (max-width: 600px) {
-          flex-direction: column;
           font-size: 24px;
         }
 

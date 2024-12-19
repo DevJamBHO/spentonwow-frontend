@@ -28,10 +28,10 @@
   border-radius: $border-radius;
   max-width: $form-max-width;
   width: 90%;
-  box-shadow: 0 4px 15px $shadow-color;
   transform: translateY(-50px);
   animation: slideIn 0.3s forwards;
   border: 1px solid rgba($highlight-color, 0.2);
+  @extend %shadow_level_5;
 }
 
 @keyframes slideIn {

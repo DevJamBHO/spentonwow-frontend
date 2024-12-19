@@ -2,18 +2,26 @@
   background: $secondary-color;
   border-radius: $border-radius;
   padding: 1.5rem;
-  //box-shadow: 0 10px 30px $shadow-color;
   max-width: 100%;
   text-align: center;
   color: $text-color;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  @extend %shadow_level_1;
 
   .header {
     font-size: 1.5rem;
     color: $highlight-color;
     font-weight: 700;
+    a {
+      display: flex;
+      flex-direction: row;
+      gap: $space-small;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .content {

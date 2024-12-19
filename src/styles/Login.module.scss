@@ -60,9 +60,9 @@
   padding: 1rem;
   background: $secondary-color;
   border-radius: $border-radius;
-  box-shadow: 0 4px 20px $shadow-color;
   margin-top: 1rem;
   text-align: center;
+  @extend %shadow_level_1;
 }
 
 .footer {

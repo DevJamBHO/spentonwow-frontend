@@ -1,15 +1,8 @@
-$primary-color: #121212;
-$secondary-color: #1F1F1F;
-$highlight-color: #FFD700;
-$highlight-hover-color: darken($highlight-color, 10%);
-$accent-color: red;
+@import "mixins/shadow.scss";
+
+@import "variables/colors.scss";
+@import "variables/space.scss";
+@import "variables/border.scss";
+
 $form-max-width: 800px;
 $form-max-width-big: 1200px;
-$space-big: 3rem;
-$space-medium: 2rem;
-$space-small: 1rem;
-$text-color: #E0E0E0;
-$shadow-color: rgba(0, 0, 0, 0.8);
-$border-radius: 12px;
-$border-radius-small: 8px;
-$border-radius-very-small: 4px;
