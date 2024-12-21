@@ -1,17 +1,17 @@
-const supportedLanguages = ['en', 'fr']; // Définissez vos langues supportées ici
+const supportedLanguages = ['en', 'fr'];
 
 module.exports = {
-    siteUrl: process.env.SITE_URL || 'https://spentonwow.com', // L'URL de base de votre site
-    generateRobotsTxt: true, // Génération automatique du robots.txt
-    changefreq: 'daily', // Fréquence d'exploration suggérée
-    priority: 0.7, // Priorité par défaut des pages
-    sitemapSize: 5000, // Nombre maximum d'URL par fichier sitemap
+    siteUrl: process.env.SITE_URL || 'https://spentonwow.com',
+    generateRobotsTxt: true,
+    changefreq: 'daily',
+    priority: 0.7,
+    sitemapSize: 5000,
     transform: async (config, path) => {
         return {
-            loc: path, // URL
+            loc: path,
             changefreq: 'daily',
-            priority: 0.7, // Priorité spécifique pour certaines routes
-            lastmod: new Date().toISOString(), // Date de dernière modification
+            priority: 0.7,
+            lastmod: new Date().toISOString(),
         };
     },
     additionalPaths: async (config) => {
