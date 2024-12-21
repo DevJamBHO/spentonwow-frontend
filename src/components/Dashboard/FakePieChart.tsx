@@ -14,8 +14,9 @@ const FakePieChart: React.FC = () => {
                 <div className={styles.fakeText}></div>
             </div>
             <div className={styles.message}>
-                <FontAwesomeIcon icon={faGhost} width="35" height="35" />
+                <FontAwesomeIcon icon={faGhost} width="35" height="35"/>
                 <p>{translate('removeAdblockPie')}</p>
+                <a href='https://sapling-toss.com/blog/why-ads/'>{translate('removeAdblockLink')}</a>
             </div>
         </div>
     );
