@@ -80,10 +80,12 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
     return (
         <Layout big>
             <Head>
-                <meta name="description" content={translate('meta.description')} />
-                <meta property="og:description" content={translate('meta.descriptionDashboard')} />
+                <meta name="description" content={translate('meta.description')}/>
+                <meta property="og:description" content={translate('meta.descriptionDashboard')}/>
+                <meta name="title" content={translate('meta.title')}/>
+                <meta property="og:title" content={translate('meta.title')}/>
             </Head>
-            <AdBlockDetector onDetect={setAdBlockDetected} />
+            <AdBlockDetector onDetect={setAdBlockDetected}/>
             <div className={styles.amountDetails}>
                 <div className={styles.mainContainer}>
                     <Container className={styles.mainContainer}>
