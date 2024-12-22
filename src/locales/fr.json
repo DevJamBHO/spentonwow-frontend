@@ -147,5 +147,17 @@
       "cookieContactTitle": "Contact",
       "cookieContactContent": "Pour toute question relative à cette politique de cookies, vous pouvez nous contacter à l’adresse suivante : "
     }
+  },
+  "error": {
+    "characterNotFound": {
+      "title": "Personnage Introuvable",
+      "description": "Désolé, le personnage sélectionné n'a pas pu être trouvé. Cela peut être dû à plusieurs raisons :",
+      "incorrectNameTitle": "Nom ou Serveur du Personnage Incorrect",
+      "incorrectNameDescription": "Veuillez vous assurer que vous avez correctement saisi le nom de votre personnage et sélectionné le bon royaume/région. Vous pouvez vérifier l'existence de votre personnage sur le site officiel de WoW :",
+      "armoryLinkText": "Armurerie WoW",
+      "privateProfileTitle": "Profil Privé",
+      "privateProfileDescription": "Votre profil peut être défini comme privé, empêchant toute application communautaire de récupérer des informations sur votre personnage. Par défaut, les profils sont publics. Si le vôtre est privé, cela peut être pour une bonne raison. Assurez-vous de comprendre les implications avant de rendre votre profil public.",
+      "privacySettingsLinkText": "Paramètres de Confidentialité Battle.net"
+    }
   }
 }

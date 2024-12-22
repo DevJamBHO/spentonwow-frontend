@@ -133,5 +133,17 @@
       "linkTitle": "Links to Third-Party Sites",
       "linkContent": "The SpentOnWow.com site may include links to third-party websites. These links are provided for informational purposes, and SpentOnWow.com is not responsible for the content of external sites. Users are encouraged to consult the privacy and cookie policies of these third-party sites before interacting with them."
     }
+  },
+  "error": {
+    "characterNotFound": {
+      "title": "Character Not Found",
+      "description": "Sorry, the character selected could not be found. This could be due to several reasons:",
+      "incorrectNameTitle": "Incorrect Character Name or Region",
+      "incorrectNameDescription": "Please ensure that you have correctly typed your character name and selected the correct realm/region. You can verify your character's existence on the official WoW website:",
+      "armoryLinkText": "WoW Armory",
+      "privateProfileTitle": "Private Profile",
+      "privateProfileDescription": "Your profile might be set to private, preventing any community application from retrieving information about your character. By default, profiles are public. If yours is private, it may be for a good reason. Please ensure you understand the implications before making your profile public.",
+      "privacySettingsLinkText": "Battle.net Privacy Settings"
+    }
   }
 }
