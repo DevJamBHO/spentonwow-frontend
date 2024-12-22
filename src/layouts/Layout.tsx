@@ -38,7 +38,7 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
 
     const backgroundStyle = isMobile || !videoSupported
         ? { backgroundImage: "url('/images/background.webp')" }
-        : { };
+        : {};
 
     return (
         <>
@@ -46,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
                 <meta charSet="UTF-8" />
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="keywords" content="World of Warcraft spending, WoW spending tracker, WoW expenses, track WoW expenses, WoW in-game purchases, WoW spending calculator, how much spent on WoW, WoW spending history, WoW expense tracker, total spent on WoW, WoW subscription cost, WoW microtransactions, WoW financial tracking, WoW game expenses, WoW money spent, WoW payment history, WoW spending analysis, Blizzard spending tracker" />
+                <meta name="keywords" content="World of Warcraft spending, WoW spending tracker, WoW expenses, track WoW expenses, WoW in-game purchases, WoW spending calculator, how much spent on WoW, WoW spending history, WoW expense tracker, total spent on WoW, WoW subscription cost, WoW microtransactions, WoW financial tracking, WoW game expenses, WoW money spent, WoW payment history, WoW spending analysis, Blizzard spending tracker,spent on wow" />
                 <meta name="author" content="Bakreal and Bloxas" />
                 <meta name="theme-color" content="#FFD700" />
                 <meta name="robots" content="index, follow" />
