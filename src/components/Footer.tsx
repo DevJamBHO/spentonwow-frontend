@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
                     </div>
                     <div className={styles.links}>
                         <a href="https://discord.gg/us4ySEdA2w"><FontAwesomeIcon icon={faDiscord}/>Discord</a>
-                        <a href="https://x.com/wowchievement"><FontAwesomeIcon icon={faXTwitter}/>X (twitter)</a>
+                        <a href="https://x.com/sapling_toss"><FontAwesomeIcon icon={faXTwitter}/>X (twitter)</a>
                         <a href="mailto:support@wowchievement.com"><FontAwesomeIcon icon={faEnvelope}/>Mail</a>
                     </div>
                     <div className={styles.flags}>
