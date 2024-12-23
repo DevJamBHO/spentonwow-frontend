@@ -36,7 +36,7 @@ const FakeDetails: React.FC = () => {
                 <p>
                     {translate('removeAdblock')}
                 </p>
-                <a href='https://sapling-toss.com/blog/why-ads/'>{translate('removeAdblockLink')}</a>
+                <a target="_blank" href='https://sapling-toss.com/blog/why-ads/'>{translate('removeAdblockLink')}</a>
                 <p>
                     <FontAwesomeIcon icon={faGhost} width="35" height="35" />
                 </p>

@@ -99,6 +99,7 @@
       flex-wrap: wrap;
       justify-content: space-around;
       gap: $space-medium;
+      margin-bottom: $space-small;
 
       @media (max-width: 600px) {
         flex-direction: column;

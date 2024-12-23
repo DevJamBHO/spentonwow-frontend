@@ -92,6 +92,9 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         <Header />
                         <AmountSection />
                         <CardList />
+                        <a target="_blank" href="https://sapling-toss.com/blog/how-spent-works/">
+                            {translate('explainAmount')}
+                        </a>
                     </Container>
 
                     {
