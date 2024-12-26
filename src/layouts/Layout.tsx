@@ -43,21 +43,23 @@ const Layout: React.FC<LayoutProps> = ({ children, big = false }) => {
     return (
         <>
             <Head>
-                <meta charSet="UTF-8" />
-                <link rel="icon" href="/favicon.ico" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="keywords" content="World of Warcraft spending, WoW spending tracker, WoW expenses, track WoW expenses, WoW in-game purchases, WoW spending calculator, how much spent on WoW, WoW spending history, WoW expense tracker, total spent on WoW, WoW subscription cost, WoW microtransactions, WoW financial tracking, WoW game expenses, WoW money spent, WoW payment history, WoW spending analysis, Blizzard spending tracker,spent on wow" />
-                <meta name="author" content="Bakreal and Bloxas" />
-                <meta name="theme-color" content="#FFD700" />
-                <meta name="robots" content="index, follow" />
-                <meta name="msapplication-TileColor" content="#18181C" />
-                <meta name="msapplication-TileImage" content="/logo.webp" />
-                <meta property="og:title" content="Spentonwow.com" />
-                <meta property="og:image" content="/logo.webp" />
-                <meta property="og:url" content="https://Spentonwow.com/" />
-                <meta property="og:site_name" content="Spentonwow" />
-                <meta property="og:type" content="website" />
-                <meta property="og:locale" content="en_US" />
+                <meta charSet="UTF-8"/>
+                <link rel="icon" href="/favicon.ico"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta name="keywords" content="World of Warcraft spending, WoW spending tracker, WoW expenses, track WoW expenses, WoW in-game purchases, WoW spending calculator, how much spent on WoW, WoW spending history, WoW expense tracker, total spent on WoW, WoW subscription cost, WoW microtransactions, WoW financial tracking, WoW game expenses, WoW money spent, WoW payment history, WoW spending analysis, Blizzard spending tracker,spent on wow"/>
+                <meta name="author" content="Sapling-toss"/>
+                <meta name="title" content="Spentonwow"/>
+                <meta name="description" content="Spentonwow helps World of Warcraft players track and visualize their spending history on their account. Gain insights into your purchases and manage your gaming budget effectively with our intuitive platform."/>
+                <meta name="theme-color" content="#FFD700"/>
+                <meta name="robots" content="index, follow"/>
+                <meta name="msapplication-TileColor" content="#18181C"/>
+                <meta name="msapplication-TileImage" content="/images/logo.webp"/>
+                <meta property="og:title" content="Spentonwow.com"/>
+                <meta property="og:image" content="/images/logo.webp"/>
+                <meta property="og:url" content="https://Spentonwow.com/"/>
+                <meta property="og:site_name" content="Spentonwow"/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:locale" content="en_US"/>
             </Head>
             <div className={`${styles.root} ${big ? styles.big : ''}`} style={backgroundStyle}>
                 {!isMobile && videoSupported && (
