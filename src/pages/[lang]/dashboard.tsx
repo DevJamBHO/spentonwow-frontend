@@ -58,6 +58,8 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         console.error(translate('dataError'), error);
                     }
                 });
+        } else {
+            router.push('/')
         }
     }, [region, server, character]);
 
