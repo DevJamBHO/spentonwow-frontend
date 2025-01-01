@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/layouts/Layout';
 import Container from '@/components/Container';
-import {detectLanguage, getLanguage, setLanguage} from '@/utils/language';
+import { detectLanguage, getLanguage, setLanguage } from '@/utils/language';
 import useSpentStore from '@/store/useSpentStore';
 import Header from '@/components/Dashboard/Header';
 import AmountSection from '@/components/Dashboard/AmountSection';
@@ -15,6 +15,7 @@ import FakeDetails from '@/components/Dashboard/FakeDetails';
 import AdBlockDetector from '@/components/AdBlockDetector';
 import Share from '@/components/Dashboard/Share';
 import Wowchievement from '@/components/Dashboard/Wowchievement';
+import WowRecap from '@/components/Dashboard/WowRecap';
 import Loading from '@/components/Loading';
 import PieChart from '@/components/Dashboard/PieChart';
 import { trackPlausibleEvent } from '@/utils/plausible';
@@ -82,12 +83,12 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
     return (
         <Layout big>
             <Head>
-                <meta name="description" content={translate('meta.description')}/>
-                <meta property="og:description" content={translate('meta.descriptionDashboard')}/>
-                <meta name="title" content={translate('meta.title')}/>
-                <meta property="og:title" content={translate('meta.title')}/>
+                <meta name="description" content={translate('meta.description')} />
+                <meta property="og:description" content={translate('meta.descriptionDashboard')} />
+                <meta name="title" content={translate('meta.title')} />
+                <meta property="og:title" content={translate('meta.title')} />
             </Head>
-            <AdBlockDetector onDetect={setAdBlockDetected}/>
+            <AdBlockDetector onDetect={setAdBlockDetected} />
             <div className={styles.amountDetails}>
                 <div className={styles.mainContainer}>
                     <Container className={styles.mainContainer}>
@@ -119,7 +120,7 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         <Share initialAmountEur={initialAmountEur} initialAmountUsd={initialAmountUsd} />
                     </Container>
                     <Container className={styles.sideContainer}>
-                        <Wowchievement region={region} server={server} character={character} />
+                        <WowRecap region={region} server={server} character={character} />
                     </Container>
                     <Container className={styles.sideContainer}>
                         {adBlockDetected ? (
