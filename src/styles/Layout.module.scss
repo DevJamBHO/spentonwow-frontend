@@ -45,6 +45,9 @@
     width: 100%;
     max-width: $form-max-width;
     animation: fadeIn 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: $space-medium;
   }
 
   &.big {
