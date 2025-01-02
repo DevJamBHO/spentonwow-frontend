@@ -92,6 +92,11 @@
     "question1": "Tu veux suivre tes succès et quêtes de réputation ?",
     "question2": "Va voir sur ce site pour ne rien manquer !"
   },
+  "wowrecap": {
+    "title": "WoW Recap",
+    "question1": "Jeter un coup d'oeil a votre retrospective 2024 !",
+    "question2": "Check out WoW recap!"
+  },
   "meta": {
     "title": "SpentOnWoW.com",
     "description": "Calculez vos dépenses dans World of Warcraft, abonnements, microtransactions et achats en jeu. Découvrez combien vous avez réellement investi... dans cette quête sans fin !",

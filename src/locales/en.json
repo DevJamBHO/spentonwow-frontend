@@ -92,6 +92,11 @@
     "question1": "Want to track your achievements and reputation quests?",
     "question2": "Check out this site to never miss out!"
   },
+  "wowrecap": {
+    "title": "WoW Recap",
+    "question1": "Get your 2024 WoW activity report!",
+    "question2": "Check out WoW recap!"
+  },
   "meta": {
     "title": "SpentOnWoW.com",
     "description": "Calculate your spending on World of Warcraft, subscriptions, microtransactions, and in-game purchases. Find out how much you’ve actually invested... in this never-ending quest!",
