@@ -1,16 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from '@/styles/Notification.module.scss';
 import {faBullhorn, faXmark} from "@fortawesome/free-solid-svg-icons";
 
-import {hasNotification} from "@/utils/notification";
+import {hasNotification} from "@/api/notification";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import useSettingStore from '@/store/useSettingStore';
+import {NotificationResponse} from "@/interfaces/Notifications";
 
 
 const Notification: React.FC = () => {
-    const notification = hasNotification();
     const notificationTime = useSettingStore(state => state.notificationTime);
     const setNotificationTime = useSettingStore(state => state.setNotificationTime);
+    const [notification, setNotification] = useState<NotificationResponse | null >();
+
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const data = await hasNotification()
+                setNotification(data)
+            } catch (err: unknown) {
+
+            }
+        }
+        fetchNotifications()
+    }, []);
 
     const closeNotification = () => {
         const date = new Date();
@@ -26,13 +39,13 @@ const Notification: React.FC = () => {
     };
 
     if (!shouldShowNotification()) return null;
-    
+
     if (notification) {
         return (
             <div className={styles.notificationContainer}>
                 <a
                     href={notification.url}
-                    target={notification.site === 'wowchievement' ? '_self' : '_blank'}
+                    target={notification.site === 'spentonwow' ? '_self' : '_blank'}
                     className={styles.notification}
                 >
 
