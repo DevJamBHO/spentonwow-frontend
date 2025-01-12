@@ -34,7 +34,6 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUsd, region, server, character }) => {
     const [isClient, setIsClient] = useState<boolean>(false);
-    const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const fetchSpentData = useSpentStore((state) => state.fetchSpentData);
     const router = useRouter();
@@ -64,10 +63,6 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
         }
     }, [region, server, character]);
 
-    useEffect(() => {
-        trackPlausibleEvent('adBlock', { active: adBlockDetected });
-    }, [adBlockDetected]);
-
     if (!isClient) {
         return null;
     }
@@ -88,7 +83,6 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                 <meta name="title" content={translate('meta.title')} />
                 <meta property="og:title" content={translate('meta.title')} />
             </Head>
-            <AdBlockDetector onDetect={setAdBlockDetected} />
             <div className={styles.amountDetails}>
                 <div className={styles.mainContainer}>
                     <Container className={styles.mainContainer}>
@@ -99,20 +93,8 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                             {translate('explainAmount')}
                         </a>
                     </Container>
-
-                    {
-                        !adBlockDetected && (
-                            <Container className={styles.sideContainer}>
-                                <AdSense />
-                            </Container>
-                        )
-                    }
                     <Container className={styles.mainContainer}>
-                        {adBlockDetected ? (
-                            <FakeDetails />
-                        ) : (
                             <Details />
-                        )}
                     </Container>
                 </div>
                 <div className={styles.sideContainers}>
@@ -123,11 +105,7 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         <WowRecap region={region} server={server} character={character} />
                     </Container>
                     <Container className={styles.sideContainer}>
-                        {adBlockDetected ? (
-                            <FakePieChart />
-                        ) : (
-                            <PieChart />
-                        )}
+                        <PieChart />
                     </Container>
                 </div>
             </div>

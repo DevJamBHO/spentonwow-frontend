@@ -36,7 +36,6 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
   const [server, setServer] = useState<string>('');
   const [character, setCharacter] = useState<string>('');
   const [isClient, setIsClient] = useState<boolean>(false);
-  const [adBlockDetected, setAdBlockDetected] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
 
@@ -49,9 +48,6 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    trackPlausibleEvent('adBlock', { active: adBlockDetected });
-  }, [adBlockDetected]);
 
   const handleRegionSelect = (selectedRegion: string) => {
     setRegion(selectedRegion);
@@ -81,7 +77,6 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
           <meta name="title" content={translate('meta.title')} />
           <meta property="og:title" content={translate('meta.title')} />
         </Head>
-        <AdBlockDetector onDetect={setAdBlockDetected} />
         <Container
             header={<div>{translate('siteName')}</div>}
         >
@@ -132,13 +127,6 @@ const Login: React.FC<LoginProps> = ({ capabilities }) => {
             </Button>
           </form>
         </Container>
-        {
-            !adBlockDetected && (
-                <div className={styles.adContainer}>
-                  <AdSense />
-                </div>
-            )
-        }
       </Layout>
   );
 };
