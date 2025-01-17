@@ -11,18 +11,12 @@ import CardList from '@/components/Dashboard/CardList';
 import styles from '@/styles/Dashboard.module.scss';
 import { translate } from '@/utils/translate';
 import Details from '@/components/Dashboard/Details';
-import FakeDetails from '@/components/Dashboard/FakeDetails';
-import AdBlockDetector from '@/components/AdBlockDetector';
 import Share from '@/components/Dashboard/Share';
-import Wowchievement from '@/components/Dashboard/Wowchievement';
 import WowRecap from '@/components/Dashboard/WowRecap';
 import Loading from '@/components/Loading';
 import PieChart from '@/components/Dashboard/PieChart';
-import { trackPlausibleEvent } from '@/utils/plausible';
 import { GetServerSidePropsContext } from 'next';
-import FakePieChart from '@/components/Dashboard/FakePieChart';
 import { RedirectException } from "@/utils/apiService";
-import AdSense from "@/components/AdSense";
 
 interface DashboardProps {
     initialAmountEur: number;
