@@ -12,7 +12,6 @@ import styles from '@/styles/Dashboard.module.scss';
 import { translate } from '@/utils/translate';
 import Details from '@/components/Dashboard/Details';
 import Share from '@/components/Dashboard/Share';
-import WowRecap from '@/components/Dashboard/WowRecap';
 import Loading from '@/components/Loading';
 import PieChart from '@/components/Dashboard/PieChart';
 import { GetServerSidePropsContext } from 'next';
@@ -88,15 +87,12 @@ const Dashboard: React.FC<DashboardProps> = ({ initialAmountEur, initialAmountUs
                         </a>
                     </Container>
                     <Container className={styles.mainContainer}>
-                            <Details />
+                        <Details />
                     </Container>
                 </div>
                 <div className={styles.sideContainers}>
                     <Container className={styles.sideContainer}>
                         <Share initialAmountEur={initialAmountEur} initialAmountUsd={initialAmountUsd} />
-                    </Container>
-                    <Container className={styles.sideContainer}>
-                        <WowRecap region={region} server={server} character={character} />
                     </Container>
                     <Container className={styles.sideContainer}>
                         <PieChart />
